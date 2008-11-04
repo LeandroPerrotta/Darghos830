@@ -1343,7 +1343,6 @@ void Player::onCreatureAppear(const Creature* creature, bool isLogin)
 		#ifndef __CONSOLE__
 		gui.m_pBox.addPlayer(this);
 		#endif
-		std::cout << name << " has logged in." << std::endl;
 		g_game.checkPlayersRecord();
 		IOLoginData::getInstance()->updateOnlineStatus(guid, true);
 	}
@@ -1455,7 +1454,6 @@ void Player::onCreatureDisappear(const Creature* creature, uint32_t stackpos, bo
 		#ifndef __CONSOLE__
 		gui.m_pBox.removePlayer(this);
 		#endif
-		std::cout << getName() << " has logged out." << std::endl;
 		IOLoginData::getInstance()->updateOnlineStatus(guid, false);
 
 		bool saved = false;

@@ -272,11 +272,11 @@ ReturnValue Combat::canTargetCreature(const Player* player, const Creature* targ
 		if(target->getPlayer() && target->getPlayer()->getVocationId() == 0)
 		return RET_YOUMAYNOTATTACKTHISPLAYER;
 
-		if(player->getSecureMode() == SECUREMODE_ON && !Combat::isInPvpZone(player, target) &&
-			player->getSkullClient(target->getPlayer()) == SKULL_NONE)
-		{
-			return RET_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
-		}
+		if(player->getSecureMode() == SECUREMODE_ON && target->getPlayer() &&
+		target->getPlayer()->getSkullClient(player) == SKULL_NONE && !Combat::isInPvpZone(player, target))
+	{
+		return RET_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
+	}
 
 	return Combat::canDoCombat(player, target);
 }
@@ -363,8 +363,8 @@ ReturnValue Combat::canDoCombat(const Creature* attacker, const Creature* target
 			if(attackerPlayer->getLevel() < g_config.getNumber(ConfigManager::MIN_PKING_LEVEL) && targetPlayer->getSkull() == SKULL_NONE && !targetPlayer->hasAttacked(attackerPlayer))
                     return RET_YOUMAYNOTATTACKTHISPLAYER;
 
-			//	if(isProtected(attackerPlayer, targetPlayer))
-					return RET_YOUMAYNOTATTACKTHISPLAYER;
+			/*if(isProtected(attackerPlayer, targetPlayer))
+					return RET_YOUMAYNOTATTACKTHISPLAYER;*/
 
 				//nopvp-zone
 				if(targetPlayer->getTile()->hasFlag(TILESTATE_NOPVPZONE))

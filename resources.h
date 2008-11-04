@@ -41,6 +41,6 @@
 #endif
 
 #define STATUS_SERVER_NAME "Darghos"
-#define STATUS_SERVER_CODENAME "JZ"
+#define STATUS_SERVER_CODENAME "The Forgotten Server"
 #define STATUS_SERVER_PROTOCOL "8.3"
 #define STATUS_SERVER_VERSION "0.2"
