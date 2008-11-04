@@ -272,7 +272,7 @@ ReturnValue Combat::canTargetCreature(const Player* player, const Creature* targ
 		if(target->getPlayer() && target->getPlayer()->getVocationId() == 0)
 		return RET_YOUMAYNOTATTACKTHISPLAYER;
 
-		if(player->getSecureMode() == SECUREMODE_ON && target->getPlayer() &&
+if(player->getSecureMode() == SECUREMODE_ON && target->getPlayer() &&
 		target->getPlayer()->getSkullClient(player) == SKULL_NONE && !Combat::isInPvpZone(player, target))
 	{
 		return RET_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
