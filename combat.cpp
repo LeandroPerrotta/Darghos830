@@ -268,7 +268,7 @@ ReturnValue Combat::canTargetCreature(const Player* player, const Creature* targ
 		else
 			return RET_YOUMAYNOTATTACKTHISCREATURE;
 	}
-
+	
 		if(target->getPlayer() && target->getPlayer()->getVocationId() == 0)
 		return RET_YOUMAYNOTATTACKTHISPLAYER;
 
