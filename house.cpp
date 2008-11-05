@@ -36,7 +36,7 @@ House::House(uint32_t _houseid) :
 transfer_container(ITEM_LOCKER1)
 {
 	isLoaded = false;
-	houseName = "Forgotten headquarter (Flat 1, Area 42)";
+	houseName = "Darghos headquarter (Flat 1, Area 42)";
 	houseOwner = 0;
 	posEntry.x = 0;
 	posEntry.y = 0;
