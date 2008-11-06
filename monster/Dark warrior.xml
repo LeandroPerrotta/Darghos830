@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <monster name="Dark Warrior" nameDescription="a warrior" race="blood" experience="45" speed="600" manacost="320">
   <health now="100000" max="100000"/>
-  <look type="268" head="95" body="95" legs="95" feet="95" addons="2" corpse="6007"/>
+  <look type="268" head="95" body="95" legs="95" feet="95" addons="2" corpse="6080"/>
   <targetchange interval="2000" chance="0"/>
   <strategy attack="100" defense="0"/>
   <flags>

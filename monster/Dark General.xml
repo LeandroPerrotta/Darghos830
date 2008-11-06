@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <monster name="Dark General" nameDescription="a elite warrior" race="blood" experience="2245000" speed="0" manacost="0">
   <health now="900000" max="900000"/>
-  <look type="268" head="80" body="95" legs="80" feet="95" addons="3" corpse="6007"/>
+  <look type="268" head="80" body="95" legs="80" feet="95" addons="3" corpse="6080"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>
   <flags>
