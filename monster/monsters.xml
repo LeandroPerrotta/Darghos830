@@ -195,6 +195,7 @@
 	<monster name="Krapt-Kun" file="krapt.xml" />
 	<monster name="Uruk-hai" file="uruk.xml" />
 	<monster name="Krish-Katul" file="krish.xml" />
+	<monster name="Dracola" file="dracola.xml" />
 	
 
 	<!-- Bosses -->
@@ -206,6 +207,7 @@
 	<monster name="Grorlam" file="grorlam.xml" />
 	<monster name="Son of verminor" file="Son of verminor.xml" />
 	<monster name="thashi aharon" file="thashi aharon.xml" />
+	<monster name="Nosferatu" file="Nosferatu.xml" />
 
 	<!-- Throwers -->
 	<monster name="Magicthrower" file="magicthrower.xml" />
