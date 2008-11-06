@@ -44,7 +44,7 @@
     <immunity invisible="1"/>
   </immunities>
     <summons maxSummons="30">
-    <summon name="dwarf" interval="500" chance="100" max="10"/>
+    <summon name="dark warrior" interval="500" chance="100" max="10"/>
   </summons>
   <voices interval="5000" chance="50">
     <voice sentence="Ahhhh!"/>
