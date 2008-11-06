@@ -208,6 +208,8 @@
 	<monster name="Son of verminor" file="Son of verminor.xml" />
 	<monster name="thashi aharon" file="thashi aharon.xml" />
 	<monster name="Nosferatu" file="Nosferatu.xml" />
+	<monster name="Dark warrior" file="dark warrior.xml" />
+	<monster name="Dark General" file="dark general.xml" />
 
 	<!-- Throwers -->
 	<monster name="Magicthrower" file="magicthrower.xml" />
