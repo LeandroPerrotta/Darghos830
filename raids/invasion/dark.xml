@@ -1,0 +1,14 @@
+<raid>
+<announce delay="0" type="event" message="A dark army is marching to Quendor City."/>
+<announce delay="35000" type="event" message="There will be blood on Quendor City, be ready for the war!"/>
+<announce delay="60000" type="event" message="The Dark Army is on Quendor City! War has begun!"/>
+
+<areaspawn delay="6000" centerx="2045" centery="1867" centerz="7" radius="5">
+<monster name="Dark warrior" minamount="2" maxamount="5"/>
+</areaspawn>
+
+<singlespawn delay="60000" name="Dark General" x="2055" y="1865" z="7"/>
+
+<singlespawn delay="60000" name="Dark General" x="2055" y="1870" z="7"/>
+
+</raid>
