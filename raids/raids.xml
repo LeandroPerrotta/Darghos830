@@ -15,6 +15,7 @@
 		<raid name="warwolf_quendor" file="invasion/warwolf_quendor.xml" interval2="60" margin="3500"/>
 		<raid name="sand_quendor" file="invasion/sand_quendor.xml" interval2="60" margin="3500"/>
 		<raid name="durin" file="invasion/durin.xml" interval2="60" margin="3500"/>
+		<raid name="dark" file="invasion/dark.xml" interval2="60" margin="3500"/>
 		
 		-- Thorn
 		<raid name="thorn_elven" file="invasion/thorn_elven.xml" interval2="60" margin="5000"/>
