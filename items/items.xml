@@ -4814,13 +4814,13 @@
 		<attribute key="attack" value="15"/>
 		<attribute key="weaponType" value="axe"/>
 	</item>
-	<item id="2389" article="a" name="spear" plural="spears">
+		<item id="2389" article="a" name="spear" plural="spears">
 		<attribute key="weight" value="2000"/>
 		<attribute key="attack" value="25"/>
 		<attribute key="weaponType" value="distance"/>
 		<attribute key="shootType" value="spear"/>
 		<attribute key="range" value="5"/>
-		<attribute key="breakChance" value="10"/>
+		<attribute key="breakChance" value="1"/>
 		<attribute key="ammoAction" value="moveback"/>
 	</item>
 	<item id="2390" article="a" name="magic longsword">

@@ -5,6 +5,7 @@ setCombatParam(combat, COMBAT_PARAM_DISTANCEEFFECT, CONST_ANI_WEAPONTYPE)
 
 function getSpellDamage(cid, weaponSkill, weaponAttack, attackStrength)
 
+	local attackStrength = 100
 	local maxWeaponDamage = ((weaponSkill * (weaponAttack * 0.0425)) + (weaponAttack * 0.2)) * 2
 	local damage = -(math.random(0, maxWeaponDamage) * attackStrength) / 100
 

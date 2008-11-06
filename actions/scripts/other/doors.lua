@@ -1,3 +1,14 @@
+function checkStackpos(item, position)
+	position.stackpos = STACKPOS_TOP_MOVEABLE_ITEM_OR_CREATURE
+	local thing = getThingfromPos(position)
+	position.stackpos = STACKPOS_TOP_FIELD
+	local field = getThingfromPos(position)
+	if item.uid ~= thing.uid and thing.itemid >= 100 or field.itemid ~= 0 then
+		return FALSE
+	end
+	return TRUE
+end
+
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if isInArray(questDoors, item.itemid) == TRUE then
 		if getPlayerStorageValue(cid, item.actionid) ~= -1 then
@@ -12,24 +23,22 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 			doTransformItem(item.uid, item.itemid + 1)
 			doTeleportThing(cid, toPosition, TRUE)
 		else
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You need level " .. item.actionid - 1000 .. " to pass here.")
+			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Only the worthy may pass.")
 		end
 		return TRUE
 	elseif isInArray(keys, item.itemid) == TRUE then
 		if itemEx.actionid > 0 then
 			if item.actionid == itemEx.actionid then
-				if itemEx.itemid ~= 6254 then
-					doTransformItem(itemEx.uid, doors[itemEx.itemid])	
-				else
-					doPlayerSendCancel(cid, "Sorry, it is not possible.")
-				end	
-			else
-				doPlayerSendCancel(cid, "The key does not match.")
+				if doors[itemEx.itemid] ~= nil then
+					doTransformItem(itemEx.uid, doors[itemEx.itemid])
+					return TRUE
+				end
 			end
+			doPlayerSendCancel(cid, "The key does not match.")
 			return TRUE
 		end
 		return FALSE
-	elseif isInArray(horizontalOpenDoors, item.itemid) == TRUE then
+	elseif isInArray(horizontalOpenDoors, item.itemid) == TRUE and checkStackpos(item, fromPosition) == TRUE then
 		local newPosition = toPosition
 		newPosition.y = newPosition.y + 1
 		local doorPosition = fromPosition
@@ -38,14 +47,17 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		if doorCreature.itemid ~= 0 then
 			if getTilePzInfo(doorPosition) == TRUE and getTilePzInfo(newPosition) == FALSE and doorCreature.uid ~= cid then
 				doPlayerSendCancel(cid, "Sorry, not possible.")
-				return TRUE
 			else
 				doTeleportThing(doorCreature.uid, newPosition, TRUE)
+				if isInArray(openSpecialDoors, item.itemid) ~= TRUE then
+					doTransformItem(item.uid, item.itemid - 1)
+				end
 			end
+			return TRUE
 		end
 		doTransformItem(item.uid, item.itemid - 1)
 		return TRUE
-	elseif isInArray(verticalOpenDoors, item.itemid) == TRUE then
+	elseif isInArray(verticalOpenDoors, item.itemid) == TRUE and checkStackpos(item, fromPosition) == TRUE then
 		local newPosition = toPosition
 		newPosition.x = newPosition.x + 1
 		local doorPosition = fromPosition
@@ -54,14 +66,17 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		if doorCreature.itemid ~= 0 then
 			if getTilePzInfo(doorPosition) == TRUE and getTilePzInfo(newPosition) == FALSE and doorCreature.uid ~= cid then
 				doPlayerSendCancel(cid, "Sorry, not possible.")
-				return TRUE
 			else
 				doTeleportThing(doorCreature.uid, newPosition, TRUE)
+				if isInArray(openSpecialDoors, item.itemid) ~= TRUE then
+					doTransformItem(item.uid, item.itemid - 1)
+				end
 			end
+			return TRUE
 		end
 		doTransformItem(item.uid, item.itemid - 1)
 		return TRUE
-	elseif doors[item.itemid] ~= nil then
+	elseif doors[item.itemid] ~= nil and checkStackpos(item, fromPosition) == TRUE then
 		if item.actionid == 0 then
 			doTransformItem(item.uid, doors[item.itemid])
 		else

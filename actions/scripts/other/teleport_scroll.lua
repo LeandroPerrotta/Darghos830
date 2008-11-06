@@ -72,8 +72,12 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 				doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, 'Você gastou 2 premium days e foi teleportado para o templo de Northrend. Agora você possui ' .. getPlayerPremiumDays(cid) .. ' premium days.')			
 			end			
 
-			if (getPlayerGroupId(cid) <= 2) then    
-				assert(con:execute("INSERT INTO item_shop (`item_name`, `account_id`, `date`, `price`) values ('teleport scroll','" .. getPlayerAccount(cid) .. "','" .. timeNowTerrivel .. "','2');"))
+			if (getPlayerGroupId(cid) <= 2) then    				
+				local cur = assert(con:execute("SELECT `account_id` FROM `players` WHERE `name` = '".. getCreatureName(cid) .."';"))
+				local row = cur:fetch({}, "a")
+				local account_id = row.account_id			
+			
+				assert(con:execute("INSERT INTO item_shop (`item_name`, `account_id`, `date`, `price`) values ('teleport scroll','" .. account_id .. "','" .. timeNowTerrivel .. "','2');"))
 			end
 
 			
