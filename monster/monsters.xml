@@ -210,6 +210,7 @@
 	<monster name="Nosferatu" file="Nosferatu.xml" />
 	<monster name="Dark warrior" file="dark warrior.xml" />
 	<monster name="Dark General" file="dark general.xml" />
+	<monster name="Dark Archer" file="dark archer.xml" />
 
 	<!-- Throwers -->
 	<monster name="Magicthrower" file="magicthrower.xml" />
