@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <monster name="Dark Warrior" nameDescription="a warrior" race="blood" experience="45" speed="600" manacost="320">
-  <health now="100000" max="100000"/>
+  <health now="10000" max="10000"/>
   <look type="268" head="95" body="95" legs="95" feet="95" addons="2" corpse="6080"/>
   <targetchange interval="2000" chance="0"/>
   <strategy attack="100" defense="0"/>
@@ -18,7 +18,7 @@
     <flag runonhealth="0"/>
   </flags>
   <attacks>
-    <attack name="melee" interval="1000" min="-150" max="-500"/>
+    <attack name="melee" interval="1000" min="-100" max="-390"/>
   </attacks>
   <defenses armor="8" defense="10"/>
   <immunities>
