@@ -46,6 +46,7 @@ void Protocol::onSendMessage(OutputMessage* msg)
 			std::cout << "Protocol::onSendMessage - encrypt" << std::endl;
 			#endif
 			XTEA_encrypt(*msg);
+			msg->addCryptoHeader(m_checksumEnabled);
 		}
 	}
 
@@ -143,7 +144,6 @@ void Protocol::XTEA_encrypt(OutputMessage& msg)
 		buffer[read_pos + 1] = v1;
 		read_pos += 2;
 	}
-	msg.addCryptoHeader();
 }
 
 bool Protocol::XTEA_decrypt(NetworkMessage& msg)
