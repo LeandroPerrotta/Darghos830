@@ -18,17 +18,17 @@
     <flag runonhealth="150"/>
   </flags>
   <attacks>
-    <attack name="melee" interval="2000" skill="50" attack="30"/>
-    <attack name="physical" interval="1000" chance="10" range="7" radius="4" target="1" min="-100" max="-220">
+    <attack name="melee" interval="2000" skill="50" attack="70"/>
+    <attack name="physical" interval="1000" chance="10" range="7" radius="4" target="1" min="-50" max="-320">
       <attribute key="shootEffect" value="bolt"/>
       <attribute key="areaEffect" value="blackspark"/>
     </attack>
-    <attack name="physical" interval="1000" chance="34" range="7" min="-55" max="-105">
+    <attack name="physical" interval="1000" chance="34" range="7" min="-55" max="-305">
       <attribute key="shootEffect" value="whirlwindaxe"/>
     </attack>
   </attacks>
   <defenses armor="15" defense="15">
-    <defense name="healing" interval="1000" chance="50" min="75" max="725">
+    <defense name="healing" interval="1000" chance="50" min="750" max="2025">
       <attribute key="areaEffect" value="blueshimmer"/>
     </defense>
   </defenses>
