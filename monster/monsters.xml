@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <monsters>
-	<monster name="Amazon" file="grim reaper.xml" />
-	<monster name="Grim Reaper" file="amazon.xml" />
+	<monster name="Amazon" file="amazon.xml" />
+	<monster name="Grim Reaper" file="grim reaper.xml" />
 	<monster name="bug 1" file="bug 1.xml" />
 	<monster name="ent" file="ent.xml" />
 	<monster name="bug 2" file="bug 2.xml" />
