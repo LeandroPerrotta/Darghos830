@@ -1,0 +1,15 @@
+<raid>
+<announce delay="0" type="event" message="I live once more- Behemoth King"/>
+<announce delay="1500" type="event" message="The Lord of Giants is climbing the fountations of the earth."/>
+<announce delay="6000" type="event" message="Quendor City, be ready to kill Behemoth king!"/>
+<announce delay="150000" type="event" message="Quendor is under attack! Behemoth King is here!"/>
+
+<areaspawn delay="6000" centerx="2045" centery="1867" centerz="7" radius="5">
+<monster name="Dark warrior" minamount="2" maxamount="5"/>
+</areaspawn>
+
+<singlespawn delay="60000" name="Dark General" x="2055" y="1865" z="7"/>
+
+<singlespawn delay="60000" name="Dark General" x="2055" y="1870" z="7"/>
+
+</raid>
