@@ -5,11 +5,10 @@
 <announce delay="150000" type="event" message="Quendor is under attack! Behemoth King is here!"/>
 
 <areaspawn delay="6000" centerx="2045" centery="1867" centerz="7" radius="5">
-<monster name="Dark warrior" minamount="2" maxamount="5"/>
+<monster name="Behemoth" minamount="5" maxamount="7"/>
 </areaspawn>
 
-<singlespawn delay="60000" name="Dark General" x="2055" y="1865" z="7"/>
+<singlespawn delay="60000" name="Behemoth King" x="2055" y="1865" z="7"/>
 
-<singlespawn delay="60000" name="Dark General" x="2055" y="1870" z="7"/>
 
 </raid>
