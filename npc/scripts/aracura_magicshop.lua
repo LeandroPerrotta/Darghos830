@@ -60,12 +60,20 @@ shopModule:addBuyableItem({'wand of plague', 'plague'}, 2188, 5000, 'wand of pla
 shopModule:addBuyableItem({'wand of cosmic energy', 'cosmic energy'}, 2189, 10000, 'wand of cosmic energy')
 shopModule:addBuyableItem({'wand of inferno', 'inferno'}, 2187, 15000, 'wand of inferno')
 
+shopModule:addBuyableItem({'wand of decay', 'decay'}, 2188, 5000, 'wand of decay')
+shopModule:addBuyableItem({'wand of draconia', 'draconia'}, 8921, 7500, 'wand of draconia')
+shopModule:addBuyableItem({'wand of voodoo', 'voodoo'}, 8922, 22000, 'wand of voodoo')
+
 -- Rods
 shopModule:addBuyableItem({'snakebite rod', 'snakebite'}, 2182, 500, 'snakebite rod')
 shopModule:addBuyableItem({'moonlight rod', 'moonlight'}, 2186, 1000, 'moonlight rod')
 shopModule:addBuyableItem({'volcanic rod', 'volcanic'}, 2185, 5000, 'volcanic rod')
 shopModule:addBuyableItem({'quagmire rod', 'quagmire'}, 2181, 10000, 'quagmire rod')
 shopModule:addBuyableItem({'tempest rod', 'tempest'}, 2183, 15000, 'tempest rod')
+
+shopModule:addBuyableItem({'underworld rod', 'underworld'}, 8910, 22000, 'underworld rod')
+shopModule:addBuyableItem({'terra rod', 'terra'}, 2181, 10000, 'terra rod')
+shopModule:addBuyableItem({'springsprout rod', 'springsprout'}, 8912, 18000, 'springsprout rod')
 
 -- Runes
 shopModule:addBuyableItem({'ultimate healing'}, 2273, 270, 3, 'ultimate healing rune')
