@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <monsters>
-	<monster name="Amazon" file="amazon.xml" />
+	<monster name="Amazon" file="grim reaper.xml" />
+	<monster name="Grim Reaper" file="amazon.xml" />
 	<monster name="bug 1" file="bug 1.xml" />
 	<monster name="ent" file="ent.xml" />
 	<monster name="bug 2" file="bug 2.xml" />
@@ -13,6 +14,7 @@
 	<monster name="Banshee" file="banshee.xml" />
 	<monster name="Bazir" file="bazir.xml" />
 	<monster name="Bat" file="bat.xml" />
+	<monster name="grynch clan goblin" file="grynch clan goblin.xml" />
 	<monster name="Quara Pincher" file="quara pincher.xml" />
 	<monster name="Quara Constrictor" file="Quara Constrictor.xml" />
 	<monster name="Quara Hydromancer" file="Quara Hydromancer.xml" />
