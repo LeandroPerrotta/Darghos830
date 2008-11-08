@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
   
-<monster name="Behemoth King" nameDescription="a behemoth king" race="blood" species="hard" experience="8000000" speed="400" manacost="0">
+<monster name="Behemoth King" nameDescription="a behemoth king" race="blood" species="hard" experience="7000000" speed="400" manacost="0">
     <health now="1200000" max="1200000"/>
 
     <look type="55" head="20" body="30" legs="40" feet="50" corpse="2931"/>
