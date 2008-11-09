@@ -10,7 +10,7 @@
 		<parameter key="keywords" value="job;name;offer;support;attack;cure;magic items" />
 		<parameter key="keyword_reply1" value="I am the seller of runes and magic items." />
 		<parameter key="keyword_reply2" value="My name is Willian. Why do you ask?" />
-		<parameter key="keyword_reply3" value="I sell wands (vortex, dragonbreath, plague, cosmic energy and inferno), rods (snakebite, moonlight, volcanic, quagmire and tempest), runes (support, attack and cure) and magic items." />	
+		<parameter key="keyword_reply3" value="I sell wands (vortex, dragonbreath, plague, cosmic energy, decay, draconia, voodoo and inferno), rods (snakebite, moonlight, volcanic, quagmire, underworld, terra, springsprout and tempest), runes (support, attack and cure) and magic items." />	
 		<parameter key="keyword_reply4" value="I sell magic wall and paralize" />
 		<parameter key="keyword_reply5" value="I sell heavy magic missile, great fireball, explosion and sudden death." />
 		<parameter key="keyword_reply6" value="I sell ultimate healing." />	
