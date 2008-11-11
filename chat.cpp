@@ -359,9 +359,9 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 	if(!channel || !player)
 		return false;
 
-	if(player->getAccountType() < ACCOUNT_TYPE_TUTOR)
+	if(player->getAccountType() < ACCOUNT_TYPE_GAMEMASTER)
 	{
-		if(player->hasCondition(CONDITION_TRADETICKS) && (channelId == 0x05 || channelId == 0x06 || channelId == 0x08))
+		if(player->hasCondition(CONDITION_TRADETICKS) && (channelId == 0x05 || channelId == 0x06))
 		{
 			player->sendCancel("You may only place one offer in two minutes.");
 			return false;
@@ -899,7 +899,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 	}
 
 	if(channelId == 0x00 && player->getGuildLevel() > 1)
-		type = SPEAK_CHANNEL_R2;
+		type = SPEAK_CHANNEL_O;
 
 	return channel->talk(player, type, text);
 }

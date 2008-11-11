@@ -102,6 +102,7 @@ s_defcommands Commands::defined_commands[] =
 	{"/unban", &Commands::unban},
 	{"/ghost", &Commands::ghost},
 	{"/clean", &Commands::clean},
+	{"/shutdown", &Commands::shutdownServer},
 #ifdef __ENABLE_SERVER_DIAGNOSTIC__
 	{"/serverdiag", &Commands::serverDiag},
 #endif
@@ -743,6 +744,24 @@ bool Commands::closeServer(Creature* creature, const std::string& cmd, const std
 
 	if(creature->getPlayer())
 		creature->getPlayer()->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Server is now closed.");
+
+	return true;
+}
+
+bool Commands::shutdownServer(Creature* creature, const std::string& cmd, const std::string& param)
+{
+	Player* player = creature->getPlayer();
+
+		if(!player){
+		return false;
+	}	
+		
+    if (player->isRemoved()){ 
+    return false; 
+    }
+
+	if (player && !param.empty())
+		g_game.sheduleShutdown(atoi(param.c_str()));
 
 	return true;
 }

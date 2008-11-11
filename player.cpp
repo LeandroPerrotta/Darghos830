@@ -73,6 +73,7 @@ Creature()
 	if(client)
 		client->setPlayer(this);
 
+	accountNumber = 0;
 	name = _name;
 	setVocation(0);
 	capacity = 400.00;
@@ -1343,6 +1344,9 @@ void Player::onCreatureAppear(const Creature* creature, bool isLogin)
 		#ifndef __CONSOLE__
 		gui.m_pBox.addPlayer(this);
 		#endif
+		#ifdef __CONSOLE__
+		std::cout << name << " has logged in." << std::endl;
+		#endif
 		g_game.checkPlayersRecord();
 		IOLoginData::getInstance()->updateOnlineStatus(guid, true);
 	}
@@ -1453,6 +1457,9 @@ void Player::onCreatureDisappear(const Creature* creature, uint32_t stackpos, bo
 
 		#ifndef __CONSOLE__
 		gui.m_pBox.removePlayer(this);
+		#endif
+		#ifdef __CONSOLE__
+		std::cout << getName() << " has logged out." << std::endl;
 		#endif
 		IOLoginData::getInstance()->updateOnlineStatus(guid, false);
 
@@ -2125,7 +2132,7 @@ void Player::death()
 
 	if(skillLoss)
 	{
-           if (!protectedDeath)
+      if(!protectedDeath)
         {
 		//Magic level loss
 		uint32_t sumMana = 0;
@@ -2259,7 +2266,7 @@ void Player::preSave()
 	{
 		if(skillLoss)
 		{
-                     if (!protectedDeath)
+          if(!protectedDeath)
             {
 			experience -= getLostExperience();
 			while(level > 1 && experience < Player::getExpForLevel(level))
@@ -3206,6 +3213,11 @@ bool Player::setAttackedCreature(Creature* creature)
 	else
 		setFollowCreature(NULL);
 
+	if(creature)
+	{
+		Dispatcher::getDispatcher().addTask(createTask(
+			boost::bind(&Game::checkCreatureAttack, &g_game, getID())));
+	}
 	return true;
 }
 
@@ -3554,13 +3566,13 @@ void Player::onKilledCreature(Creature* target)
 				targetPlayer->getSkull() == SKULL_NONE)
 			{
 				addUnjustifiedDead(targetPlayer);
+			}
 			
-			if (Combat::isProtected(targetPlayer))
+				if (Combat::isProtected(targetPlayer))
                 {
                     targetPlayer->setProtectedDeath(true);
                     targetPlayer->setDropLoot(false);
                 }
-            }
 
 			if(!Combat::isInPvpZone(this, targetPlayer) && hasCondition(CONDITION_INFIGHT))
 			{
@@ -3903,7 +3915,7 @@ void Player::manageAccount(const std::string &text)
 			newCharacterName = text;
 			trimString(newCharacterName);
 			if(newCharacterName.length() < 4)
-				msg << "Your name you want is too short, please select a longer name.";
+				msg << "The name you want is too short, please select a longer name.";
 			else if(newCharacterName.length() > 20)
 				msg << "The name you want is too long, please select a shorter name.";
 			else if(asLowerCaseString(newCharacterName).substr(0, 4) == "god "
@@ -4081,7 +4093,7 @@ void Player::manageAccount(const std::string &text)
 			newCharacterName = text;
 			trimString(newCharacterName);
 			if(newCharacterName.length() < 4)
-				msg << "Your name you want is too short, please select a longer name.";
+				msg << "The name you want is too short, please select a longer name.";
 			else if(newCharacterName.length() > 20)
 				msg << "The name you want is too long, please select a shorter name.";
 			else if(asLowerCaseString(newCharacterName).substr(0, 4) == "god "

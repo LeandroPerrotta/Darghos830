@@ -49,17 +49,17 @@ class OutputMessage : public NetworkMessage, boost::noncopyable
 		char* getOutputBuffer() { return (char*)&m_MsgBuf[m_outputBufferStart];}
 
 		void writeMessageLength()
-	{
-		add_header((uint16_t)(m_MsgSize));
-	}
+		{
+			add_header((uint16_t)(m_MsgSize));
+		}
 
 		void addCryptoHeader(bool addChecksum)
-	{
-		if(addChecksum){
-			add_header((uint32_t)(adlerChecksum((uint8_t*)(m_MsgBuf + m_outputBufferStart), m_MsgSize)));
+		{
+			if(addChecksum)
+				add_header((uint32_t)(adlerChecksum((uint8_t*)(m_MsgBuf + m_outputBufferStart), m_MsgSize)));
+
+			add_header((uint16_t)(m_MsgSize));
 		}
-		add_header((uint16_t)(m_MsgSize));
-	}
 
 		enum OutputMessageState
 		{
@@ -89,33 +89,33 @@ class OutputMessage : public NetworkMessage, boost::noncopyable
 				std::cout << "\t" << n << ".\t" << *iter << std::endl;
 		}
 #endif
+
 	protected:
 #ifdef __TRACK_NETWORK__
 		std::list<std::string> last_uses;
 #endif
 
-	template <typename T>
-	inline void add_header(T add){
-		if((int32_t)m_outputBufferStart - (int32_t)sizeof(T) < 0){
-			std::cout << "Error: [OutputMessage::add_header] m_outputBufferStart(" << m_outputBufferStart <<
+		template <typename T>
+		inline void add_header(T add)
+		{
+			if((int32_t)m_outputBufferStart - (int32_t)sizeof(T) < 0)
+			{
+				std::cout << "Error: [OutputMessage::add_header] m_outputBufferStart(" << m_outputBufferStart <<
 					") < " << sizeof(T) << std::endl;
-			return;
+				return;
+			}
+
+			m_outputBufferStart = m_outputBufferStart - sizeof(T);
+			*(T*)(m_MsgBuf + m_outputBufferStart) = add;
+			//added header size to the message size
+			m_MsgSize = m_MsgSize + sizeof(T);
 		}
-		m_outputBufferStart = m_outputBufferStart - sizeof(T);
-		*(T*)(m_MsgBuf + m_outputBufferStart) = add;
-		//added header size to the message size
-		m_MsgSize = m_MsgSize + sizeof(T);
-	}
 
 		void freeMessage()
 		{
 			setConnection(NULL);
 			setProtocol(NULL);
 			m_frame = 0;
-				//allocate enough size for headers
-		//2 bytes for unencrypted message size
-		//4 bytes for checksum
-		//2 bytes for encrypted message size
 			m_outputBufferStart = 8;
 			//setState have to be the last one
 			setState(OutputMessage::STATE_FREE);

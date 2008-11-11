@@ -2,7 +2,7 @@
 #include "resources.h"
 #include <windows.h>
 
-ID_ICON ICON "TheForgottenServer.ico"
+ID_ICON ICON "Darghos.ico"
 
 ID_MENU MENU
 BEGIN

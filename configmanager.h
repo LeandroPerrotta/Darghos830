@@ -86,6 +86,7 @@ class ConfigManager
 			REPLACE_KICK_ON_LOGIN,
 			ANIMATED_SPELLS,
 			OPEN_AT_SAVE_SERVER,
+			EMERGENCY_SAVE,
 			LAST_STRING_CONFIG /* this must be the last one */
 		};
 

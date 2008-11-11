@@ -31,6 +31,7 @@
 
 #include "otsystem.h"
 #include "exception.h"
+#include "configmanager.h"
 
 #include "game.h"
 
@@ -42,6 +43,7 @@ typedef std::map<uint32_t, char*> FunctionMap;
 #endif
 
 extern Game g_game;
+extern ConfigManager g_config;
 
 uint32_t max_off;
 uint32_t min_off;
@@ -165,8 +167,10 @@ EXCEPTION_DISPOSITION
 	uint32_t file,foundRetAddress = 0;
 	_MEMORY_BASIC_INFORMATION mbi;
 
+if(g_config.getString(ConfigManager::EMERGENCY_SAVE) == "yes"){ 
 	Dispatcher::getDispatcher().addTask(
 		createTask(boost::bind(&Game::saveGameState, &g_game, true)));
+    }
 
 	std::ostream *outdriver;
 	std::cout << "Error: generating report file..." << std::endl;

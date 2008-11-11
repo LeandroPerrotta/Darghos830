@@ -212,10 +212,9 @@ void mainLoader()
 	SetConsoleTitle(STATUS_SERVER_NAME);
 	#endif
 	#endif
-    std::cout << STATUS_SERVER_NAME << " - Version " << STATUS_SERVER_VERSION << " (" << STATUS_SERVER_CODENAME << ")." << std::endl;
-	std::cout << "------------------------------------DARGHOS-------------------------------------" << std::endl;
-	std::cout << "--------------------------------------------------------------------------------" << std::endl;
-
+	std::cout << STATUS_SERVER_NAME << " - Version " << STATUS_SERVER_VERSION << " (" << STATUS_SERVER_CODENAME << ")." << std::endl;
+	std::cout << "A server developed by Talaturen, Kiper, Kornholijo, Jonern, Lithium & Elf." << std::endl;
+	std::cout << "--------------------------------------------------------------------------" << std::endl;
 
 	#if defined __DEBUG__MOVESYS__ || defined __DEBUG_HOUSES__ || defined __DEBUG_MAILBOX__ || defined __DEBUG_LUASCRIPTS__ || defined __DEBUG_RAID__ || defined __DEBUG_NET__
 	std::cout << ">> Debugging:";
@@ -830,10 +829,9 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 					{
 						gui.m_logText = "";
 						gui.m_lineCount = 0;
-					std::cout << STATUS_SERVER_NAME << " - Version " << STATUS_SERVER_VERSION << " (" << STATUS_SERVER_CODENAME << ")." << std::endl;
-                  	std::cout << "------------------------------------DARGHOS-------------------------------------" << std::endl;
-                   	std::cout << "--------------------------------------------------------------------------------" << std::endl;
-
+						std::cout << STATUS_SERVER_NAME << " - Version " << STATUS_SERVER_VERSION << " (" << STATUS_SERVER_CODENAME << ")." << std::endl;
+						std::cout << "Server developed by Talaturen, Kiper, Kornholijo, Jonern, Lithium & Elf(bug)." << std::endl;
+						std::cout << "-----------------------------------------------------------------------------" << std::endl << std::endl;
 					}
 					break;
 				case ID_MENU_GAME_ACCEPT:
@@ -932,7 +930,7 @@ int32_t WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszA
 	gui.initTrayMenu();
 	gui.initFont();
 	wincl.hInstance = hInstance;
-	wincl.lpszClassName = "darghos_gui";
+	wincl.lpszClassName = "forgottenserver_gui";
 	wincl.lpfnWndProc = WindowProcedure;
 	wincl.style = CS_DBLCLKS;
 	wincl.cbSize = sizeof(WNDCLASSEX);
@@ -945,7 +943,7 @@ int32_t WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszA
 	wincl.hbrBackground = (HBRUSH)COLOR_BACKGROUND;
 	if(!RegisterClassEx(&wincl))
 		return 0;
-	gui.m_mainWindow = CreateWindowEx(0, "darghos_gui", STATUS_SERVER_NAME, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 707, 453, HWND_DESKTOP, NULL, hInstance, NULL);
+	gui.m_mainWindow = CreateWindowEx(0, "forgottenserver_gui", STATUS_SERVER_NAME, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 707, 453, HWND_DESKTOP, NULL, hInstance, NULL);
 	ShowWindow(gui.m_mainWindow, 1);
 	while(GetMessage(&messages, NULL, 0, 0))
 	{

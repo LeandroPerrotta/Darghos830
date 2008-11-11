@@ -389,7 +389,7 @@ bool Actions::openContainer(Player* player, Container* container, const uint8_t 
 		if(!player->canOpenCorpse(container->getCorpseOwner()))
 		{
 			player->sendCancel("You are not the owner.");
-			return false;
+			return true;
 		}
 	}
 

@@ -126,8 +126,8 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confString[RANDOMIZE_TILES] = getGlobalString(L, "randomizeTiles", "yes");
 	m_confString[DEFAULT_PRIORITY] = getGlobalString(L, "defaultPriority", "high");
 	m_confString[EXPERIENCE_FROM_PLAYERS] = getGlobalString(L, "experienceByKillingPlayers", "no");
-	m_confString[CLEAN_MAP_AT_SERVERSAVE] = getGlobalString(L, "cleanMapAtServerSave", "yes");
 	m_confString[OPEN_AT_SAVE_SERVER] = getGlobalString(L, "OpenAtSaveServer", "yes");
+	m_confString[CLEAN_MAP_AT_SERVERSAVE] = getGlobalString(L, "cleanMapAtServerSave", "yes");
 	m_confString[FREE_PREMIUM] = getGlobalString(L, "freePremium", "no");
 	m_confInteger[PROTECTION_LEVEL] = getGlobalNumber(L, "protectionLevel", 1);
 	m_confString[ADMIN_LOGS_ENABLED] = getGlobalString(L, "adminLogsEnabled", "no");
@@ -141,6 +141,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confString[REPLACE_KICK_ON_LOGIN] = getGlobalString(L, "replaceKickOnLogin", "yes");
 	m_confString[ANIMATED_SPELLS] = getGlobalString(L, "animatedspells", "yes");
 	m_confInteger[MIN_PKING_LEVEL] = getGlobalNumber(L, "minPkLevel", 1);
+	m_confString[EMERGENCY_SAVE] = getGlobalString(L, "EmergencySave", "yes");
 	m_isLoaded = true;
 
 	lua_close(L);

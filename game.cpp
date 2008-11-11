@@ -186,7 +186,7 @@ void Game::setGameState(GameState_t newState)
 
 				Houses::getInstance().payHouses();
 				Dispatcher::getDispatcher().addTask(
-					createTask(boost::bind(&Game::saveGameState, this, true)));
+					createTask(boost::bind(&Game::saveGameState, this, false)));
 				break;
 			}
 			case GAME_STATE_STARTUP:
@@ -202,20 +202,11 @@ void Game::saveGameState(bool savePlayers)
 {
 	if(savePlayers)
 	{
-        int64_t start = OTSYS_TIME();
-        int32_t playersSaved = 0;
-
-        std::cout << ">> Salvando jogadores..." << std::endl;
-        
 		for(AutoList<Player>::listiterator it = Player::listPlayer.list.begin(); it != Player::listPlayer.list.end(); ++it)
 		{
 			(*it).second->loginPosition = (*it).second->getPosition();
 			IOLoginData::getInstance()->savePlayer((*it).second, false);
-			playersSaved++;
 		}
-		
-		std::cout << ">> Foram salvos " << playersSaved << " jogadores em " << (OTSYS_TIME() - start) / (1000.) << " segundos." << std::endl;		
-
 	}
 
 	g_bans.saveBans();
@@ -3334,7 +3325,9 @@ bool Game::playerSaySpell(Player* player, SpeakClasses type, const std::string& 
 bool Game::playerWhisper(Player* player, const std::string& text)
 {
 	SpectatorVec list;
-	getSpectators(list, player->getPosition());
+	getSpectators(list, player->getPosition(), false, false,
+		Map::maxClientViewportX, Map::maxClientViewportX,
+		Map::maxClientViewportY, Map::maxClientViewportY);
 	SpectatorVec::const_iterator it;
 
 	//send to client
@@ -3614,7 +3607,11 @@ bool Game::internalCreatureSay(Creature* creature, SpeakClasses type, const std:
 		if(type == SPEAK_YELL || type == SPEAK_MONSTER_YELL)
 			getSpectators(list, creature->getPosition(), false, true, 18, 18, 14, 14);
 		else
-			getSpectators(list, creature->getPosition(), false, false);
+		{
+			getSpectators(list, creature->getPosition(), false, false,
+				Map::maxClientViewportX, Map::maxClientViewportX,
+				Map::maxClientViewportY, Map::maxClientViewportY);
+		}
 
 		//send to client
 		Player* tmpPlayer = NULL;
@@ -4588,6 +4585,45 @@ void Game::autoSave()
 	Dispatcher::getDispatcher().addTask(
 		createTask(boost::bind(&Game::saveGameState, this, true)));
 	Scheduler::getScheduler().addEvent(createSchedulerTask(g_config.getNumber(ConfigManager::AUTO_SAVE_EACH_MINUTES)  * 1000 * 60, boost::bind(&Game::autoSave, this)));
+}
+
+void Game::sheduleShutdown(int minutes)
+{
+	if (minutes > 0)
+		checkShutdown(minutes);
+}
+
+void Game::checkShutdown(int minutes)
+{
+	if(minutes == 0){
+		setGameState(GAME_STATE_CLOSED);
+
+		AutoList<Player>::listiterator it = Player::listPlayer.list.begin();
+				while(it != Player::listPlayer.list.end())
+				{
+					(*it).second->kickPlayer(true);
+					it = Player::listPlayer.list.begin();
+				}
+				
+		Dispatcher::getDispatcher().addTask(
+		createTask(boost::bind(&Game::saveGameState, this, true)));
+
+		std::cout << ":: Shutting down Server..." << std::endl;
+		OTSYS_SLEEP(1500);
+		exit(1);
+	}
+	else {
+		std::stringstream msg;
+		msg << "" << g_config.getString(ConfigManager::SERVER_NAME) << " is going down in " << minutes << (minutes > 1? " minutes!" : " minute! Please logout.") << std::ends;
+
+		AutoList<Player>::listiterator it = Player::listPlayer.list.begin();
+		while(it != Player::listPlayer.list.end()){
+			(*it).second->sendTextMessage(MSG_INFO_DESCR, msg.str().c_str());
+			++it;
+		}
+
+		Scheduler::getScheduler().addEvent(createSchedulerTask(60000, boost::bind(&Game::checkShutdown, this, minutes - 1)));
+	}
 }
 
 void Game::prepareServerSave()

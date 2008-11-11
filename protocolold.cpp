@@ -44,7 +44,8 @@ void ProtocolOld::deleteProtocolTask()
 void ProtocolOld::disconnectClient(uint8_t error, const char* message)
 {
 	OutputMessage* output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
-	if(output){
+	if(output)
+	{
 		TRACK_MESSAGE(output);
 		output->AddByte(error);
 		output->AddString(message);
@@ -55,20 +56,20 @@ void ProtocolOld::disconnectClient(uint8_t error, const char* message)
 
 bool ProtocolOld::parseFirstPacket(NetworkMessage& msg)
 {
-	if(g_game.getGameState() == GAME_STATE_SHUTDOWN){
+	if(g_game.getGameState() == GAME_STATE_SHUTDOWN)
+	{
 		getConnection()->closeConnection();
 		return false;
 	}
 
-	/*uint16_t clientos =*/ msg.GetU16();
+	/*uint16_t clientOS =*/ msg.GetU16();
 	uint16_t version  = msg.GetU16();
 	msg.SkipBytes(12);
 
-	if(version <= 760){
-		disconnectClient(0x0A, STRING_CLIENT_VERSION);
-	}
-
-	if(!RSA_decrypt(g_otservRSA, msg)){
+	if(version <= 760)
+		disconnectClient(0x0A, "Devido a um update o Darghos agora requer o cliente versao 8.31! \n" "Maiores informacoes em www.darghos.com.br \n" "Atenciosamente, equipe UltraxSoft.");
+	if(!RSA_decrypt(g_otservRSA, msg))
+	{
 		getConnection()->closeConnection();
 		return false;
 	}
@@ -81,11 +82,10 @@ bool ProtocolOld::parseFirstPacket(NetworkMessage& msg)
 	enableXTEAEncryption();
 	setXTEAKey(key);
 
-	if(version <= 822){
+	if(version <= 822)
 		disableChecksum();
-	}
 
-	disconnectClient(0x0A, STRING_CLIENT_VERSION);
+	disconnectClient(0x0A, "Devido a um update o Darghos agora requer o cliente versao 8.31! \n" "Maiores informacoes em www.darghos.com.br \n" "Atenciosamente, equipe UltraxSoft.");
 	return false;
 }
 
@@ -93,4 +93,3 @@ void ProtocolOld::onRecvFirstMessage(NetworkMessage& msg)
 {
 	parseFirstPacket(msg);
 }
-
