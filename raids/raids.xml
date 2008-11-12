@@ -30,6 +30,7 @@
 		
 		-- Aracura
 		<raid name="dragon_aracura" file="invasion/dragon_aracura.xml" interval2="60" margin="10000"/>
+		<raid name="grims_aracura" file="invasion/grims.xml" interval2="60" margin="10000"/>		
 		<raid name="undead_aracura" file="invasion/undead_aracura.xml" interval2="60" margin="10000"/>
 		<raid name="giant_aracura" file="invasion/giant_aracura.xml" interval2="60" margin="10000"/>
 		<raid name="demon_aracura" file="invasion/demon_aracura.xml" interval2="60" margin="10000"/>

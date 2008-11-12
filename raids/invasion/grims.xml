@@ -1,0 +1,35 @@
+<raid>
+<announce delay="0" type="event" message="Aracura esta sob pressao de enormes poderes das trevas!Cuidado!"/>
+<announce delay="45000" type="event" message="Grim Reapers estao dominando aracura e irao logo dominar todo o mundo de Darghos!"/>
+<announce delay="50000" type="event" message="Aracura esta em ataque!Corra para proteja-la!Grim Reapers prometem destruir a cidade inteira!"/>
+<announce delay="65000" type="event" message="Aracura esta em ataques!"/>
+
+<areaspawn delay="50000" centerx="2012" centery="2142" centerz="7" radius="10">
+<monster name="Grim Reaper" minamount="2" maxamount="5"/>
+</areaspawn>
+
+<areaspawn delay="55000" centerx="1987" centery="2143" centerz="7" radius="10">
+<monster name="Grim Reaper" minamount="1" maxamount="3"/>
+</areaspawn>
+
+<areaspawn delay="60000" centerx="2006" centery="2141" centerz="7" radius="15">
+<monster name="Grim Reaper" minamount="15" maxamount="20"/>
+</areaspawn>
+
+<areaspawn delay="70000" centerx="2008" centery="2141" centerz="7" radius="5">
+<monster name="Grim Reaper" minamount="3" maxamount="5"/>
+</areaspawn>
+
+<areaspawn delay="60000" centerx="2008" centery="2141" centerz="7" radius="5">
+<monster name="Grim Reaper" minamount="3" maxamount="5"/>
+</areaspawn>
+
+<areaspawn delay="65000" centerx="2008" centery="2141" centerz="7" radius="5">
+<monster name="Grim Reaper" minamount="3" maxamount="5"/>
+</areaspawn>
+
+<areaspawn delay="50000" centerx="2064" centery="2143" centerz="7" radius="45">
+<monster name="Grim Reaper" miamount="60" maxamount="80"/>
+</areaspawn>
+
+</raid>
