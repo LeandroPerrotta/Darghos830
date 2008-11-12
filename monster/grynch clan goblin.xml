@@ -1,30 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Grynch Clan Goblin" nameDescription="a Grynch Clan Goblin" race="blood" experience="4" speed="400" manacost="0">
-  <health now="80" max="80"/>
-  <look type="61" head="20" body="30" legs="40" feet="50" corpse="6002"/>
-  <targetchange interval="5000" chance="0"/>
+<monster name="The Grims King" nameDescription="a Grim Reapers KING" race="blood" experience="4" speed="500" manacost="0">
+  <health now="50000" max="50000"/>
+  <look type="300" head="20" body="30" legs="40" feet="50" corpse="6002"/>
+  <targetchange interval="5000" chance="15"/>
   <strategy attack="0" defense="100"/>
-  <flags>
+   <flags>
     <flag summonable="0"/>
     <flag attackable="1"/>
-    <flag hostile="0"/>
+    <flag hostile="1"/>
     <flag illusionable="0"/>
     <flag convinceable="0"/>
     <flag pushable="0"/>
-    <flag canpushitems="0"/>
-    <flag canpushcreatures="0"/>
-    <flag targetdistance="7"/>
-    <flag staticattack="0"/>
-    <flag runonhealth="80"/>
+    <flag canpushitems="1"/>
+    <flag canpushcreatures="1"/>
+    <flag targetdistance="1"/>
+    <flag staticattack="90"/>
+    <flag runonhealth="0"/>
   </flags>
   <attacks>
-  </attacks>
-  <defenses armor="10" defense="12">
-    <defense name="speed" interval="1000" chance="15" speedchange="500" duration="5000">
+  
+  <attack name="speed" interval="2000" chance="12" radius="6" target="0" speedchange="-800" duration="60000">
       <attribute key="areaEffect" value="redshimmer"/>
+    </attack>
+
+  <attack name="melee" interval="2000" skill="130" attack="135"/>
+	<attack name="death" interval="1000" chance="9" range="7" min="0" max="-550">
+	  <attribute key="shootEffect" value="suddendeath"/>
+	  <attribute key="areaEffect" value="mortarea"/>
+	</attack>
+	<attack name="lifedrain" interval="1000" chance="9" length="7" spread="0" min="0" max="-700">
+	  <attribute key="areaEffect" value="redspark"/>
+	</attack>
+	<attack name="physical" interval="1000" chance="8" range="7" radius="4" target="1" min="0" max="-495">
+	  <attribute key="shootEffect" value="fire"/>
+	  <attribute key="areaEffect" value="redspark"/>
+   	</attack>
+	<attack name="physical" interval="1000" chance="11" lenght="7" spread="3" min="0" max="-400">
+	  <attribute key="areaEffect" value="redshimmer"/>
+	</attack>
+  </attacks>
+  <defenses armor="50" defense="50">
+    <defense name="healing" interval="1000" chance="25" min="100" max="195">
+      <attribute key="areaEffect" value="blueshimmer"/>
     </defense>
   </defenses>
-  <immunities>
+ 
+ 	<elements>
+	  <element energyPercent="10"/>
+	  <element earthPercent="-20"/>
+	  <element icePercent="-10"/>
+	  <element holyPercent="10"/>
+	  <element deathPercent="20"/>
+	  <element firePercent="10"/>
+	</elements>
+
+ <immunities>
     <immunity physical="0"/>
     <immunity energy="0"/>
     <immunity fire="1"/>
@@ -36,82 +66,32 @@
     <immunity invisible="1"/>
   </immunities>
   <voices interval="5000" chance="10">
-    <voice sentence="T'was not me hand in your pocket!"/>
-    <voice sentence="Look! Cool stuff in house. Let's get it!"/>
-    <voice sentence="Uhh! Nobody home!"/>
-    <voice sentence="Me just borrowed it!"/>
-    <voice sentence="Me no steal! Me found it!"/>
-    <voice sentence="Me had it for five minutes. It's family heirloom now!"/>
-    <voice sentence="Nice human won't hurt little, good goblin?"/>
-    <voice sentence="Gimmegimme!"/>
-    <voice sentence="Invite me in you lovely house plx!"/>
-    <voice sentence="Other Goblin stole it!"/>
-    <voice sentence="All presents mine!"/>
-    <voice sentence="Me got ugly ones purse"/>
-    <voice sentence="Free itans plz!"/>
-    <voice sentence="Not me! Not me!"/>
-    <voice sentence="Guys, help me here! Guys? Guys???"/>
-    <voice sentence="That only much dust in me pocket! Honest!"/>
-    <voice sentence="Can me have your stuff?"/>
-    <voice sentence="Halp, Big dumb one is after me!"/>
-    <voice sentence="Uh, So many shiny things!"/>
-    <voice sentence="Utani hur hur hur!"/>
-    <voice sentence="Mee? Stealing? Never!!!"/>
-    <voice sentence="Oh what fun it is to steal a one-horse open sleigh!"/>
-    <voice sentence="Must have it! Must have it!"/>
-    <voice sentence="Where me put me lockpick?"/>
-    <voice sentence="Catch me if you can!"/>
+    <voice sentence="Death!" yell="1"/>
+    <voice sentence="Come a little closer!" yell="1"/>
+    <voice sentence="The end is near!" yell="1"/>
   </voices>
-  <loot>
-    <item id="2148" countmax="16" chance1="100000" chancemax="0"/> --Gold Coin
-    <item id="2676" countmax="100" chance1="1050" chancemax="0"/> --Banana
-    <item id="6501" countmax="2" chance1="13256" chancemax="0"/> --Gingerbread Man
-    <item id="2675" countmax="3" chance1="13256" chancemax="0"/> --Orange
-    <item id="2687" countmax="5" chance1="13256" chancemax="0"/> --Cookie
-    <item id="2679" countmax="4" chance1="13256" chancemax="0"/> --Cherry
-    <item id="2674" countmax="3" chance1="13256" chancemax="0"/> --Apple
-    <item id="2678" countmax="19" chance1="1050" chancemax="0"/> --Coconut
-    <item id="1987" chance="100000"> --Bag
-      <inside>
-        <item id="2695" countmax="2" chance1="20000" chancemax="0"/> --Egg
-        <item id="2688" countmax="3" chance1="20000" chancemax="0"/> --Candy Cane
-        <item id="6394" chance="20000"/> --Cream Cake
-        <item id="6393" chance="20000"/> --Valentine Cake
-        <item id="2111" countmax="5" chance1="20000" chancemax="0"/> --Snowball
-        <item id="6497" chance="100000"/> --Present Bag
-        <item id="6277" chance="20000"/> --Lump of Cake Dough
-      </inside>
-    </item>
-    <item id="1988" chance="100000"> --Backpack
-      <inside>
-        <item id="2260" chance="10000"/> --Blank Rune
-        <item id="2163" chance="20000"/> --Magic Light Wand
-        <item id="4839" chance="20000"/> --Bottle
-        <item id="1852" chance="10000"/> --Landscape Picture
-        <item id="2172" chance="10000"/> --Bronze Amulet
-        <item id="1949" chance="10000"/> --Scroll
-        <item id="2661" chance="10000"/> --Scarf
-        <item id="5890" countmax="5" chance1="20000" chancemax="0"/> --Chicken Feather
-        <item id="5894" countmax="3" chance1="20000" chancemax="0"/> --Bat Wing
-        <item id="5902" chance="10000"/> --Honeycomb
-        <item id="6091" chance="10000"/> --Watch
-        <item id="2551" chance="10000"/> --Broom
-        <item id="2114" chance="500"/> --Piggy Bank
-        <item id="5792" chance="10000"/> --Dice
-        <item id="2560" chance="10000"/> --Mirror
-        <item id="1684" chance="10000"/> --Small Pillow
-        <item id="4873" chance="10000"/> --Explorer Brooch
-        <item id="2102" chance="10000"/> --Flower Bowl
-        <item id="2159" chance="1000"/> --Scarab Coin
-        <item id="1987" chance="100000"> --Bag
-          <inside>
-        <item id="5900" chance="10000"/> --Dwarven Beard
-        <item id="5022" chance="10000"/> --Orichalcum Pearl
-        <item id="2160" chance="100"/> --Crystal Coin
-        <item id="2534" chance="500"/> --Vampire Shield
-        </inside>
-       </item>
-     </inside>
-    </item>
-  </loot>
+	<loot>
+      <item id="2148" countmax="98" chance="40000"/>	<!-- gold coin -->
+      <item id="2148" countmax="100" chance="40000"/>	<!-- gold coin -->
+      <item id="2152" countmax="4" chance="20000"/>		<!-- Platinum Coin -->
+      <item id="2150" countmax="3" chance="10000"/>		<!-- small amethyst -->
+      <item id="6558" chance="7500"/>					<!-- concentrated demonic blood -->
+      <item id="6500" countmax="1" chance="7500"/>		<!-- demonic essence -->
+      <item id="6300" chance="7500"/>					<!-- death ring -->
+      <item id="5909" countmax="1" chance="12500"/>		<!-- white piece of cloth -->
+      <item id="2521" chance="25000"/>					<!-- dark shield -->
+	  <item id="1987" chance="100000">
+	    <inside>
+		  <item id="5022" countmax="4" chance="40000"/>	<!-- orichalcum pearl -->
+		  <item id="8889" chance="3500"/>				<!-- skullcracker armor -->
+		  <item id="7418" chance="3000"/>				<!-- nightmare blade -->
+		  <item id="7589" chance="5000"/>				<!-- strong mana potion -->
+		  <item id="8910" chance="10000"/>				<!-- underworld rod -->
+		  <item id="8473" chance="3500"/>				<!-- ultimate health potion -->
+		  <item id="8891" chance="3500"/>				<!-- paladin armor-->
+		 <item id="8870" chance="3500"/>				<!-- spirit cloak-->
+		 <item id="8887" chance="3500"/>
+		 </inside>
+	  </item>
+	</loot>
 </monster>
