@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <monsters>
 	<monster name="Amazon" file="amazon.xml" />
-	<monster name="The Grims King" file="grynch clan goblin.xml" />
+	<monster name="grynch clan goblin" file="grynch clan goblin.xml" />
 	<monster name="Grim Reaper" file="grim reaper.xml" />
 	<monster name="bug 1" file="bug 1.xml" />
 	<monster name="ent" file="ent.xml" />

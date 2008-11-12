@@ -1,8 +1,8 @@
 <raid>
-<announce delay="0" type="event" message="Aracura esta sob pressao de enormes poderes das trevas!Cuidado!"/>
-<announce delay="45000" type="event" message="Grim Reapers estao dominando aracura e irao logo dominar todo o mundo de Darghos!"/>
-<announce delay="60000" type="event" message="Aracura esta em ataque!Corra para proteja-la!Grim Reapers prometem destruir a cidade inteira!"/>
-<announce delay="80000" type="event" message="Aracura esta em ataques!"/>
+<announce delay="0" type="event" message="O mestre dos grims reapers deu a voz de que esta rondando Aracura."/>
+<announce delay="45000" type="event" message="Grim Reapers estao se preparando para proteger o mestre dos Grim Reapers!"/>
+<announce delay="60000" type="event" message="Aracura esta sendo brutamente atacada por Grim Reapers e seu mestre!"/>
+<announce delay="80000" type="event" message="Mestre dos Grim Reapers esta em Aracura!"/>
 
 <areaspawn delay="55000" centerx="2012" centery="2142" centerz="7" radius="10">
 <monster name="Grim Reaper" minamount="2" maxamount="5"/>
@@ -32,8 +32,8 @@
 <monster name="Grim Reaper" miamount="4" maxamount="10"/>
 </areaspawn>
 
-<areaspawn delay="90000" centerx="2064" centery="2143" centerz="7" radius="45">
-<monster name="Grim Reaper" miamount="3" maxamount="10"/>
+<areaspawn delay="80000" centerx="2016" centery="2138" centerz="7" radius="45">
+<monster name="grynch clan goblin" miamount="1" maxamount="1"/>
 </areaspawn>
 
 <areaspawn delay="90000" centerx="2033" centery="2136" centerz="7" radius="45">
