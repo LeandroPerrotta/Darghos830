@@ -160,7 +160,10 @@
 	<action itemid="2120" script="tools/rope.lua"/>
 	<action itemid="2553" script="tools/pick.lua"/>
 	<action itemid="5908" script="tools/knife_stake.lua"/>
-	<action itemid="5942" script="tools/knife_stake.lua"/>			
+	<action itemid="5942" script="tools/knife_stake.lua"/>	
+
+	<!-- Profession -->
+	<action itemid="2559" script="professions/lumberjack.lua"/>	
 	
 	<!-- Increase/Decrease ItemId -->
 	<action itemid="1873" function="increaseItemId"/>
