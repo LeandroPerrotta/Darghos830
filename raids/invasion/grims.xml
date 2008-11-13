@@ -18,27 +18,22 @@
 </areaspawn>
 
 <areaspawn delay="70000" centerx="2008" centery="2141" centerz="7" radius="5">
-<monster name="Grim Reaper" minamount="3" maxamount="5"/>
+<monster name="Grim Reaper" minamount="3" maxamount="8"/>
 </areaspawn>
 
 <areaspawn delay="60000" centerx="2008" centery="2141" centerz="7" radius="5">
-<monster name="Grim Reaper" minamount="3" maxamount="5"/>
+<monster name="Grim Reaper" minamount="3" maxamount="8"/>
 </areaspawn>
 
 <areaspawn delay="78000" centerx="2008" centery="2141" centerz="7" radius="5">
-<monster name="Grim Reaper" minamount="3" maxamount="5"/>
+<monster name="Grim Reaper" minamount="3" maxamount="8"/>
 </areaspawn>
 
 <areaspawn delay="80000" centerx="2064" centery="2143" centerz="7" radius="45">
 <monster name="Grim Reaper" miamount="4" maxamount="10"/>
 </areaspawn>
 
-<areaspawn delay="80000" centerx="2011" centery="2148" centerz="7" radius="15">
-<monster name="grynch clan goblin" miamount="1" maxamount="1"/>
-</areaspawn>
 
-<areaspawn delay="90000" centerx="2033" centery="2136" centerz="7" radius="10">
-<monster name="Grim Reaper" miamount="5" maxamount="10"/>
-</areaspawn>
+<singlespawn delay="95000" name="grynch clan goblin" x="2009" y="2151" z="7"/>
 
 </raid>
