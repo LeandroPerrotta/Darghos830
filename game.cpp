@@ -2608,6 +2608,7 @@ bool Game::playerRequestTrade(uint32_t playerId, const Position& pos, uint8_t st
 
 			SchedulerTask* task = createSchedulerTask(400, boost::bind(&Game::playerRequestTrade, this,
 				playerId, pos, stackPos, tradePlayerId, spriteId));
+				
 			player->setNextWalkActionTask(task);
 			return true;
 		}

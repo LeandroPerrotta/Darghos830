@@ -1160,7 +1160,9 @@ void Player::sendStats()
 void Player::sendPing(uint32_t interval)
 {
 	internalPing += interval;
-	if(internalPing >= 5000) //1 ping each 5 seconds
+
+	//1 ping each 5 seconds
+	if(internalPing >= 5000)
 	{
 		internalPing = 0;
 		npings++;
@@ -1171,10 +1173,7 @@ void Player::sendPing(uint32_t interval)
 	if(canLogout())
 	{
 		if(!client)
-		{
-			g_creatureEvents->playerLogout(this);
 			g_game.removeCreature(this, true);
-		}
 		else if(npings > 24)
 			client->logout(true, true);
 	}
@@ -2349,10 +2348,7 @@ void Player::kickPlayer(bool displayEffect)
 	if(client)
 		client->logout(displayEffect, true);
 	else
-	{
-		g_creatureEvents->playerLogout(this);
 		g_game.removeCreature(this);
-	}
 }
 
 void Player::notifyLogIn(Player* login_player)

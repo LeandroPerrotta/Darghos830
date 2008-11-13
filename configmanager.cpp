@@ -138,7 +138,6 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[FRAG_TIME] = getGlobalNumber(L, "timeToDecreaseFrags", 24 * 60 * 60 * 1000);
 	m_confInteger[WHITE_SKULL_TIME] = getGlobalNumber(L, "whiteSkullTime", 15 * 60 * 1000);
 	m_confInteger[AUTO_SAVE_EACH_MINUTES] = getGlobalNumber(L, "autoSaveEachMinutes", 0);
-	m_confString[REPLACE_KICK_ON_LOGIN] = getGlobalString(L, "replaceKickOnLogin", "yes");
 	m_confString[ANIMATED_SPELLS] = getGlobalString(L, "animatedspells", "yes");
 	m_confInteger[MIN_PKING_LEVEL] = getGlobalNumber(L, "minPkLevel", 1);
 	m_confString[EMERGENCY_SAVE] = getGlobalString(L, "EmergencySave", "yes");
