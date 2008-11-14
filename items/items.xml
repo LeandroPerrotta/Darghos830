@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+	<?xml version="1.0" encoding="UTF-8"?>
 <items>
 	<item id="100" name="void">
 	</item>
@@ -24123,10 +24123,11 @@
 	<item id="8880">
 	</item>
 	<item id="8881" article="a" name="fireborn giant armor">
-		<attribute key="description" value="It has 5% fire protection, but also increases damage taken from ice by 5%."/>
+		<attribute key="description" value="It has 5% fire protection, but also increases damage taken from ice by 5% and sword +2."/>
 		<attribute key="weight" value="12000"/>
 		<attribute key="armor" value="15"/>
 		<attribute key="absorbPercentFire" value="5"/>
+		<attribute key="skillSword" value="2"/>
 		<attribute key="absorbPercentIce" value="-5"/>
 		<attribute key="slotType" value="body"/>
 	</item>
