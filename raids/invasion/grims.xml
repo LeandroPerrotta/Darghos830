@@ -1,9 +1,10 @@
 <raid>
 <announce delay="0" type="event" message="O mestre dos grims reapers deu a voz de que esta rondando Aracura."/>
 <announce delay="24000" type="event" message="(Segundo mestres sabios, Grim Reapers King vem a ser muito forte, bravo e valente! Cuidado)"/>
-<announce delay="45000" type="event" message="Grim Reapers estao se preparando para proteger o mestre dos Grim Reapers!"/>
-<announce delay="60000" type="event" message="Aracura esta sendo brutamente atacada por Grim Reapers e seu mestre!"/>
-<announce delay="80000" type="event" message="Mestre dos Grim Reapers esta em Aracura!"/>
+<announce delay="60000" type="event" message="Grim Reapers estao se preparando para proteger o mestre dos Grim Reapers!"/>
+<announce delay="80000" type="event" message="Aracura esta sendo brutamente atacada por Grim Reapers e seu mestre!"/>
+<announce delay="105000" type="event" message="Grim King esta se preparando para o ataque cruel, corram!"/>
+<announce delay="140000" type="event" message="Mestre dos Grim Reapers esta em Aracura!"/>
 
 <areaspawn delay="55000" centerx="2012" centery="2142" centerz="7" radius="10">
 <monster name="Grim Reaper" minamount="2" maxamount="5"/>
@@ -33,7 +34,18 @@
 <monster name="Grim Reaper" miamount="4" maxamount="10"/>
 </areaspawn>
 
+<areaspawn delay="100000" centerx="2012" centery="2142" centerz="7" radius="10">
+<monster name="Grim Reaper" minamount="5" maxamount="10"/>
+</areaspawn>
 
-<singlespawn delay="95000" name="grynch clan goblin" x="2009" y="2151" z="7"/>
+<areaspawn delay="110000" centerx="1987" centery="2143" centerz="7" radius="10">
+<monster name="Grim Reaper" minamount="4" maxamount="7"/>
+</areaspawn>
+
+<areaspawn delay="160000" centerx="2006" centery="2141" centerz="7" radius="15">
+<monster name="Grim Reaper" minamount="15" maxamount="20"/>
+</areaspawn>
+
+<singlespawn delay="140000" name="grynch clan goblin" x="2009" y="2151" z="7"/>
 
 </raid>
