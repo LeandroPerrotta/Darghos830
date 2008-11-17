@@ -354,6 +354,12 @@ bool Actions::useItemEx(Player* player, const Position& fromPos, const Position&
 	if(isHotkey)
 		showUseHotkeyMessage(player, itemId, itemCount);
 
+if(item->isRune()) 
+    { 
+        if(Spell* tmp = g_spells->getRuneSpell(item->getID()))
+        player->setNextAction(OTSYS_TIME() + tmp->getExhaustion());
+    } 
+    else 
 	player->setNextAction(OTSYS_TIME() + g_config.getNumber(ConfigManager::EX_ACTIONS_DELAY_INTERVAL));
 	return true;
 }

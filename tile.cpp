@@ -293,30 +293,12 @@ void Tile::onRemoveTileItem(uint32_t index, Item* item)
 	const SpectatorVec& list = g_game.getSpectators(cylinderMapPos);
 	SpectatorVec::const_iterator it;
 
-	CreatureVector::iterator vit;
-	CreatureVector v;
-	for(vit = creatures.begin(); vit != creatures.end(); ++vit)
-	{
-		if((*vit)->isInGhostMode())
-			v.push_back((*vit));
-	}
-
 	//send to client
 	Player* tmpPlayer = NULL;
-	int32_t i = 0;
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((tmpPlayer = (*it)->getPlayer()))
-		{
-			//Get the correct index
-			i = index;
-			for(vit = v.begin(); vit != v.end(); ++vit)
-			{
-				if((*vit)->isInGhostMode() && !tmpPlayer->isAccessPlayer())
-					i--;
-			}
-			tmpPlayer->sendRemoveTileItem(this, cylinderMapPos, i, item);
-		}
+			tmpPlayer->sendRemoveTileItem(this, cylinderMapPos, index, item);
 	}
 
 	//event methods
@@ -389,23 +371,7 @@ void Tile::moveCreature(Creature* creature, Cylinder* toCylinder, bool teleport 
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((tmpPlayer = (*it)->getPlayer()))
-		{
-			//Use the correct stackpos
-			if(!creature->isInGhostMode() || tmpPlayer->isAccessPlayer())
-			{
-				int32_t i = 0;
-				for(CreatureVector::iterator it = creatures.begin(); it != creatures.end(); ++it)
-				{
-					int32_t itIndex = __getIndexOfThing((*it));
-					if(itIndex < oldStackPos)
-					{
-						if((*it)->isInGhostMode() && !tmpPlayer->isAccessPlayer())
-							i++;
-					}
-				}
-				tmpPlayer->sendCreatureMove(creature, toTile, toPos, this, fromPos, oldStackPos - i, teleport);
-			}
-		}
+			tmpPlayer->sendCreatureMove(creature, toTile, toPos, this, fromPos, oldStackPos, teleport);
 	}
 
 	//event method
@@ -456,18 +422,8 @@ ReturnValue Tile::__queryAdd(int32_t index, const Thing* thing, uint32_t count,
 					}
 				}
 			}
-			else if(!creatures.empty())
-			{
-				uint32_t i = creatures.size();
-				for(CreatureVector::const_iterator it = creatures.begin(); it != creatures.end(); ++it)
-				{
-					if((*it)->isInGhostMode())
-						i--;
-				}
-
-				if(i > 0)
-					return RET_NOTENOUGHROOM;
-			}
+				else if(!creatures.empty())
+				return RET_NOTENOUGHROOM;
 
 			if(hasFlag(TILESTATE_IMMOVABLEBLOCKSOLID))
 				return RET_NOTPOSSIBLE;
@@ -508,17 +464,7 @@ ReturnValue Tile::__queryAdd(int32_t index, const Thing* thing, uint32_t count,
 		else if(const Player* player = creature->getPlayer())
 		{
 			if(!creatures.empty() && !hasBitSet(FLAG_IGNOREBLOCKCREATURE, flags))
-			{
-				uint32_t i = creatures.size();
-				for(CreatureVector::const_iterator it = creatures.begin(); it != creatures.end(); ++it)
-				{
-					if((*it) && (*it)->isInGhostMode() && !player->isAccessPlayer())
-						i--;
-				}
-
-				if(i > 0)
-					return RET_NOTENOUGHROOM;
-			}
+				return RET_NOTENOUGHROOM;
 
 			if(player->getParent() == NULL && hasFlag(TILESTATE_NOLOGOUT))
 			{
@@ -544,17 +490,7 @@ ReturnValue Tile::__queryAdd(int32_t index, const Thing* thing, uint32_t count,
 		else
 		{
 			if(!creatures.empty() && !hasBitSet(FLAG_IGNOREBLOCKCREATURE, flags))
-			{
-				uint32_t i = creatures.size();
-				for(CreatureVector::const_iterator it = creatures.begin(); it != creatures.end(); ++it)
-				{
-					if((*it)->isInGhostMode())
-						i--;
-				}
-
-				if(i > 0)
-					return RET_NOTENOUGHROOM;
-			}
+				return RET_NOTENOUGHROOM;
 		}
 
 		for(uint32_t i = 0; i < getThingCount(); ++i)

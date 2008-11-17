@@ -94,6 +94,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[RATE_LOOT] = getGlobalNumber(L, "rateLoot", 1);
 	m_confInteger[RATE_MAGIC] = getGlobalNumber(L, "rateMagic", 1);
 	m_confInteger[RATE_SPAWN] = getGlobalNumber(L, "rateSpawn", 1);
+	m_confInteger[HOTKEYS] = getGlobalNumber(L, "enablehotkeys", 0);
 	m_confInteger[SPAWNPOS_X] = getGlobalNumber(L, "newPlayerSpawnPosX", 100);
 	m_confInteger[SPAWNPOS_Y] = getGlobalNumber(L, "newPlayerSpawnPosY", 100);
 	m_confInteger[SPAWNPOS_Z] = getGlobalNumber(L, "newPlayerSpawnPosZ", 7);
@@ -114,7 +115,6 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confString[ALLOW_CHANGEOUTFIT] = getGlobalString(L, "allowChangeOutfit", "yes");
 	m_confString[ONE_PLAYER_ON_ACCOUNT] = getGlobalString(L, "onePlayerOnlinePerAccount", "yes");
 	m_confString[CANNOT_ATTACK_SAME_LOOKFEET] = getGlobalString(L, "noDamageToSameLookfeet", "no");
-	m_confString[AIMBOT_HOTKEY_ENABLED] = getGlobalString(L, "hotkeyAimbotEnabled", "yes");
 	m_confInteger[ACTIONS_DELAY_INTERVAL] = getGlobalNumber(L, "timeBetweenActions", 200);
 	m_confInteger[EX_ACTIONS_DELAY_INTERVAL] = getGlobalNumber(L, "timeBetweenExActions", 1000);
 	m_confInteger[MAX_MESSAGEBUFFER] = getGlobalNumber(L, "maxMessageBuffer", 4);
@@ -140,7 +140,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[AUTO_SAVE_EACH_MINUTES] = getGlobalNumber(L, "autoSaveEachMinutes", 0);
 	m_confString[ANIMATED_SPELLS] = getGlobalString(L, "animatedspells", "yes");
 	m_confInteger[MIN_PKING_LEVEL] = getGlobalNumber(L, "minPkLevel", 1);
-	m_confString[EMERGENCY_SAVE] = getGlobalString(L, "EmergencySave", "yes");
+	m_confString[DDOS_PROTECTION] = getGlobalString(L, "DdosProtection", "yes");
 	m_isLoaded = true;
 
 	lua_close(L);

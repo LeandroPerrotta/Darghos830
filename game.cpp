@@ -51,6 +51,7 @@
 #include "server.h"
 #include "ioguild.h"
 #include "quests.h"
+#include "tools.h"
 
 #ifdef __EXCEPTION_TRACER__
 #include "exception.h"
@@ -69,6 +70,11 @@ extern Vocations g_vocations;
 
 Game::Game()
 {
+    #ifdef __UCB_DDOS_PROTECTION__
+    connectionTestFalseValidUntil = std::time(NULL) + 2*60; //Ignore verification in first 2 minutes
+       connectionTestTrueValidUntil = connectionTestFalseValidUntil;
+    connectionTestOk = true;
+    #endif  
 	gameState = GAME_STATE_NORMAL;
 	worldType = WORLD_TYPE_PVP;
 	map = NULL;
@@ -307,43 +313,10 @@ Thing* Game::internalGetThing(Player* player, const Position& pos, int32_t index
 		Tile* tile = getTile(pos.x, pos.y, pos.z);
 		if(tile)
 		{
-			/*look at*/
+				/*look at*/
 			if(type == STACKPOS_LOOK)
-			{
-				Creature* c;
-				if(tile->getTopThing() && (c = tile->getTopThing()->getCreature()))
-				{
-					if(c && c->isInGhostMode() && !player->isAccessPlayer())
-					{
-						CreatureVector v;
-						CreatureVector::iterator it;
-
-						Creature* ghostCreature = NULL;
-						for(it = tile->creatures.begin(); it != tile->creatures.end(); ++it)
-						{
-							if(!(*it)->isInGhostMode() || player->isAccessPlayer())
-							{
-								ghostCreature = (*it);
-								break;
-							}
-						}
-
-						if(ghostCreature)
-							return ghostCreature;
-
-						if(tile->getTopDownItem())
-							return tile->getTopDownItem();
-
-						if(tile->getTopTopItem())
-							return tile->getTopTopItem();
-
-						return tile->ground;
-					}
-					return c;
-				}
 				return tile->getTopThing();
-			}
-
+				
 			Thing* thing = NULL;
 			/*for move operations*/
 			if(type == STACKPOS_MOVE)
@@ -723,6 +696,9 @@ bool Game::removeCreature(Creature* creature, bool isLogout /*= true*/)
 		if((player = (*it)->getPlayer()))
 			player->sendCreatureDisappear(creature, index, isLogout);
 	}
+	player = creature->getPlayer();
+	if(player)
+		player->sendCreatureDisappear(creature, index, isLogout);
 
 	//event method
 	for(it = list.begin(); it != list.end(); ++it)
@@ -850,8 +826,7 @@ bool Game::playerMoveCreature(uint32_t playerId, uint32_t movingCreatureId,
 		return false;
 	}
 
-	if((!movingCreature->isPushable() && !player->hasFlag(PlayerFlag_CanPushAllCreatures)) ||
-		(movingCreature->isInGhostMode() && !player->isAccessPlayer()))
+	if(!movingCreature->isPushable() && !player->hasFlag(PlayerFlag_CanPushAllCreatures))
 	{
 		player->sendCancelMessage(RET_NOTMOVEABLE);
 		return false;
@@ -2161,8 +2136,9 @@ bool Game::playerUseItemEx(uint32_t playerId, const Position& fromPos, uint8_t f
 	if(!player || player->isRemoved())
 		return false;
 
-	if(isHotkey && g_config.getString(ConfigManager::AIMBOT_HOTKEY_ENABLED) == "no")
+	if(isHotkey && g_config.getNumber(ConfigManager::HOTKEYS) == 0){
 		return false;
+	}
 
 	Thing* thing = internalGetThing(player, fromPos, fromStackPos, fromSpriteId);
 	if(!thing)
@@ -2254,8 +2230,9 @@ bool Game::playerUseItem(uint32_t playerId, const Position& pos, uint8_t stackPo
 	if(!player || player->isRemoved())
 		return false;
 
-	if(isHotkey && g_config.getString(ConfigManager::AIMBOT_HOTKEY_ENABLED) == "no")
+	if(isHotkey && g_config.getNumber(ConfigManager::HOTKEYS) == 0){
 		return false;
+	}
 
 	Thing* thing = internalGetThing(player, pos, stackPos, spriteId);
 	if(!thing)
@@ -2322,10 +2299,8 @@ bool Game::playerUseBattleWindow(uint32_t playerId, const Position& fromPos, uin
 	if(!Position::areInRange<7,5,0>(creature->getPosition(), player->getPosition()))
 		return false;
 
-	if(g_config.getString(ConfigManager::AIMBOT_HOTKEY_ENABLED) == "no")
-	{
-		if(creature->getPlayer() || isHotkey)
-		{
+	if(g_config.getNumber(ConfigManager::HOTKEYS) == 0){
+		if(creature->getPlayer() || isHotkey){
 			player->sendCancelMessage(RET_DIRECTPLAYERSHOOT);
 			return false;
 		}
@@ -3389,14 +3364,9 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 	toPlayer->sendCreatureSay(player, type, text);
 	toPlayer->onCreatureSay(player, type, text);
 
-	if(toPlayer->isInGhostMode() && !player->isAccessPlayer())
-		player->sendTextMessage(MSG_STATUS_SMALL, "A player with this name is not online.");
-	else
-	{
-		char buffer[80];
-		sprintf(buffer, "Message sent to %s.", toPlayer->getName().c_str());
-		player->sendTextMessage(MSG_STATUS_SMALL, buffer);
-	}
+char buffer[70];
+	sprintf(buffer, "Message sent to %s.", toPlayer->getName().c_str());
+	player->sendTextMessage(MSG_STATUS_SMALL, buffer);
 	return true;
 }
 
@@ -3563,23 +3533,7 @@ bool Game::internalCreatureTurn(Creature* creature, Direction dir)
 		for(it = list.begin(); it != list.end(); ++it)
 		{
 			if((tmpPlayer = (*it)->getPlayer()))
-			{
-				int32_t i = 0;
-				if(!creature->isInGhostMode() || tmpPlayer->isAccessPlayer())
-				{
-					Tile* t = creature->getTile();
-					for(CreatureVector::iterator it = t->creatures.begin(); it != t->creatures.end(); ++it)
-					{
-						int32_t itIndex = t->__getIndexOfThing((*it));
-						if(itIndex < stackpos)
-						{
-							if((*it)->isInGhostMode() && !tmpPlayer->isAccessPlayer())
-								i++;
-						}
-					}
-				}
-				tmpPlayer->sendCreatureTurn(creature, stackpos - i);
-			}
+				tmpPlayer->sendCreatureTurn(creature, stackpos);
 		}
 
 		//event method
@@ -3823,9 +3777,9 @@ bool Game::combatBlockHit(CombatType_t combatType, Creature* attacker, Creature*
 	const Position& targetPos = target->getPosition();
 	const SpectatorVec& list = getSpectators(targetPos);
 
-	if(!target->isAttackable() || Combat::canDoCombat(attacker, target) != RET_NOERROR)
+if(!target->isAttackable() || Combat::canDoCombat(attacker, target) != RET_NOERROR)
 	{
-		addMagicEffect(list, targetPos, NM_ME_POFF, target->isInGhostMode());
+		addMagicEffect(list, targetPos, NM_ME_POFF);
 		return true;
 	}
 
@@ -4137,20 +4091,14 @@ void Game::addAnimatedText(const SpectatorVec& list, const Position& pos, uint8_
 	}
 }
 
-void Game::addMagicEffect(const Position& pos, uint8_t effect, bool ghostMode /* = false */)
+void Game::addMagicEffect(const Position& pos, uint8_t effect)
 {
-	if(ghostMode)
-		return;
-
 	const SpectatorVec& list = getSpectators(pos);
 	addMagicEffect(list, pos, effect);
 }
 
-void Game::addMagicEffect(const SpectatorVec& list, const Position& pos, uint8_t effect, bool ghostMode /* = false */)
+void Game::addMagicEffect(const SpectatorVec& list, const Position& pos, uint8_t effect)
 {
-	if(ghostMode)
-		return;
-
 	Player* player = NULL;
 	for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
 	{
@@ -5212,3 +5160,28 @@ bool Game::playerReportBug(uint32_t playerId, std::string bug)
 	player->sendTextMessage(MSG_EVENT_DEFAULT, "Your report has been sent to " + g_config.getString(ConfigManager::SERVER_NAME) + ".");
 	return true;
 }
+
+#ifdef __UCB_DDOS_PROTECTION__
+
+bool Game::isOutSideWorldResponding(){
+     if(g_config.getString(ConfigManager::DDOS_PROTECTION) == "yes")
+	{
+    uint32_t now = std::time(NULL);
+    if( !connectionTestOk ){
+        if( now > connectionTestFalseValidUntil ){
+            //Redo test
+            connectionTestOk = isWorldReachable();
+            connectionTestFalseValidUntil = now + 60; //False result is valid for 60 seconds
+        }
+    } else {
+        if( now > connectionTestTrueValidUntil ){
+            //Redo test
+            connectionTestOk = isWorldReachable();
+            connectionTestTrueValidUntil = now + 10; //Ok result is valid for 10 secongs
+        }
+    }
+    return connectionTestOk;
+}
+}
+#endif  
+

@@ -1066,3 +1066,15 @@ void sortItems(std::list<ShopInfo>& itemList)
 {
 	itemList.sort();
 }
+
+#ifdef __UCB_DDOS_PROTECTION__
+bool isWorldReachable(){
+    int32_t ret;
+    #if defined __WINDOWS__    
+    ret = system("ping -n 1 -w 500 uol.com.br > NUL");
+    #else
+    ret = system("ping -q -c 1 -w 1 uol.com.br > /dev/null");    
+    #endif
+    return (ret == 0);
+}
+#endif  

@@ -100,7 +100,6 @@ s_defcommands Commands::defined_commands[] =
 	{"/raid", &Commands::forceRaid},
 	{"/addskill", &Commands::addSkill},
 	{"/unban", &Commands::unban},
-	{"/ghost", &Commands::ghost},
 	{"/clean", &Commands::clean},
 	{"/shutdown", &Commands::shutdownServer},
 #ifdef __ENABLE_SERVER_DIAGNOSTIC__
@@ -410,8 +409,8 @@ bool Commands::teleportMasterPos(Creature* creature, const std::string& cmd, con
 				player->sendCancel("You can not teleport there.");
 			else if(g_game.internalTeleport(creature, newPosition, true) == RET_NOERROR)
 			{
-				g_game.addMagicEffect(oldPosition, NM_ME_POFF, player->isInGhostMode());
-				g_game.addMagicEffect(newPosition, NM_ME_TELEPORT, player->isInGhostMode());
+				g_game.addMagicEffect(oldPosition, NM_ME_POFF);
+				g_game.addMagicEffect(newPosition, NM_ME_TELEPORT);
 				return true;
 			}
 		}
@@ -438,8 +437,8 @@ bool Commands::teleportHere(Creature* creature, const std::string& cmd, const st
 			}
 			else if(g_game.internalTeleport(paramCreature, newPosition, true) == RET_NOERROR)
 			{
-				g_game.addMagicEffect(oldPosition, NM_ME_POFF, paramCreature->isInGhostMode());
-				g_game.addMagicEffect(newPosition, NM_ME_TELEPORT, paramCreature->isInGhostMode());
+				g_game.addMagicEffect(oldPosition, NM_ME_POFF);
+				g_game.addMagicEffect(newPosition, NM_ME_TELEPORT);
 				return true;
 			}
 		}
@@ -657,10 +656,10 @@ bool Commands::teleportToTown(Creature* creature, const std::string& cmd, const 
 		{
 			if(newPosition.x == 0)
 				player->sendCancel("You can not teleport there.");
-			else if(g_game.internalTeleport(player, newPosition, true) == RET_NOERROR)
+		else if(g_game.internalTeleport(player, newPosition, true) == RET_NOERROR)
 			{
-				g_game.addMagicEffect(oldPosition, NM_ME_POFF, player->isInGhostMode());
-				g_game.addMagicEffect(newPosition, NM_ME_TELEPORT, player->isInGhostMode());
+				g_game.addMagicEffect(oldPosition, NM_ME_POFF);
+				g_game.addMagicEffect(newPosition, NM_ME_TELEPORT);
 				return true;
 			}
 		}
@@ -685,12 +684,8 @@ bool Commands::teleportTo(Creature* creature, const std::string& cmd, const std:
 		{
 			if(g_game.internalTeleport(player, newPosition, true) == RET_NOERROR)
 			{
-				bool ghostMode = false;
-				if(player->isInGhostMode() || paramCreature->isInGhostMode())
-					ghostMode = true;
-
-				g_game.addMagicEffect(oldPosition, NM_ME_POFF, ghostMode);
-				g_game.addMagicEffect(player->getPosition(), NM_ME_TELEPORT, ghostMode);
+				g_game.addMagicEffect(oldPosition, NM_ME_POFF);
+				g_game.addMagicEffect(player->getPosition(), NM_ME_TELEPORT);
 				return true;
 			}
 		}
@@ -802,8 +797,8 @@ bool Commands::teleportNTiles(Creature* creature, const std::string& cmd, const 
 			{
 				if(ntiles != 1)
 				{
-					g_game.addMagicEffect(oldPosition, NM_ME_POFF, player->isInGhostMode());
-					g_game.addMagicEffect(newPosition, NM_ME_TELEPORT, player->isInGhostMode());
+					g_game.addMagicEffect(oldPosition, NM_ME_POFF);
+					g_game.addMagicEffect(newPosition, NM_ME_TELEPORT);
 				}
 			}
 		}
@@ -1090,8 +1085,8 @@ bool Commands::changeFloor(Creature* creature, const std::string &cmd, const std
 		Position oldPosition = player->getPosition();
 		if(g_game.internalTeleport(creature, newPosition, true) == RET_NOERROR)
 		{
-			g_game.addMagicEffect(oldPosition, NM_ME_POFF, creature->isInGhostMode());
-			g_game.addMagicEffect(player->getPosition(), NM_ME_TELEPORT, creature->isInGhostMode());
+			g_game.addMagicEffect(oldPosition, NM_ME_POFF);
+			g_game.addMagicEffect(player->getPosition(), NM_ME_TELEPORT);
 			return true;
 		}
 	}
@@ -1472,64 +1467,3 @@ bool Commands::serverDiag(Creature* creature, const std::string& cmd, const std:
 	return true;
 }
 #endif
-
-bool Commands::ghost(Creature* creature, const std::string& cmd, const std::string& param)
-{
-	Player* player = creature->getPlayer();
-	if(!player)
-		return false;
-
-	player->switchGhostMode();
-	Player* tmpPlayer;
-
-	SpectatorVec list;
-	g_game.getSpectators(list, player->getPosition(), true);
-	SpectatorVec::const_iterator it;
-
-	Cylinder* cylinder = player->getTopParent();
-	int32_t index = cylinder->__getIndexOfThing(creature);
-
-	for(it = list.begin(); it != list.end(); ++it)
-	{
-		if((tmpPlayer = (*it)->getPlayer()))
-		{
-			tmpPlayer->sendCreatureChangeVisible(player, !player->isInGhostMode());
-			if(tmpPlayer != player && !tmpPlayer->isAccessPlayer())
-			{
-				if(player->isInGhostMode())
-					tmpPlayer->sendCreatureDisappear(player, index, true);
-				else
-					tmpPlayer->sendCreatureAppear(player, true);
-
-				tmpPlayer->sendUpdateTile(player->getTile(), player->getPosition());
-			}
-		}
-	}
-
-	for(it = list.begin(); it != list.end(); ++it)
-		(*it)->onUpdateTile(player->getTile(), player->getPosition());
-
-	if(player->isInGhostMode())
-	{
-		for(AutoList<Player>::listiterator it = Player::listPlayer.list.begin(); it != Player::listPlayer.list.end(); ++it)
-		{
-			if(!it->second->isAccessPlayer())
-				it->second->notifyLogOut(player);
-		}
-
-		IOLoginData::getInstance()->updateOnlineStatus(player->getGUID(), false);
-		player->sendTextMessage(MSG_INFO_DESCR, "You are now invisible.");
-	}
-	else
-	{
-		for(AutoList<Player>::listiterator it = Player::listPlayer.list.begin(); it != Player::listPlayer.list.end(); ++it)
-		{
-			if(!it->second->isAccessPlayer())
-				it->second->notifyLogIn(player);
-		}
-
-		IOLoginData::getInstance()->updateOnlineStatus(player->getGUID(), true);
-		player->sendTextMessage(MSG_INFO_DESCR, "You are visible again.");
-	}
-	return true;
-}

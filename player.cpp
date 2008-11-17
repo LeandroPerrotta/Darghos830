@@ -186,7 +186,6 @@ Creature()
 
 	groupId = 0;
 
-	ghostMode = false;
 	requestedOutfit = false;
 #ifdef __ENABLE_SERVER_DIAGNOSTIC__
 	playerCount++;
@@ -2129,8 +2128,11 @@ void Player::death()
 
 	loginPosition = masterPos;
 
-	if(skillLoss)
-	{
+	#ifdef __UCB_DDOS_PROTECTION__
+if(skillLoss && g_game.isOutSideWorldResponding()){
+#else
+if(skillLoss){
+#endif  
       if(!protectedDeath)
         {
 		//Magic level loss
@@ -2263,11 +2265,21 @@ void Player::preSave()
 {
 	if(health <= 0)
 	{
-		if(skillLoss)
-		{
+		#ifdef __UCB_DDOS_PROTECTION__
+if(skillLoss && g_game.isOutSideWorldResponding()){
+#else
+if(skillLoss)
+#endif 
+{
           if(!protectedDeath)
             {
-			experience -= getLostExperience();
+			#ifdef __UCB_DDOS_PROTECTION__
+if( g_game.isOutSideWorldResponding() ){
+     experience -= getLostExperience();
+}
+#else
+experience -= getLostExperience();
+#endif 
 			while(level > 1 && experience < Player::getExpForLevel(level))
 			{
 				--level;
@@ -2281,6 +2293,7 @@ void Player::preSave()
 
 		health = healthMax;
 	}
+}
 }
 }
 

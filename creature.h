@@ -171,7 +171,6 @@ class Creature : public AutoID, virtual public Thing
 		virtual bool isPushable() const {return (getSleepTicks() <= 0);}
 		virtual bool isRemoved() const {return isInternalRemoved;}
 		virtual bool canSeeInvisibility() const {return false;}
-		virtual bool isInGhostMode() const {return false;}
 
 		int64_t getSleepTicks() const;
 		int32_t getWalkDelay(Direction dir) const;

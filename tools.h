@@ -113,4 +113,7 @@ uint32_t adlerChecksum(uint8_t* data, int32_t len);
 
 bool operator<(const ShopInfo& left, const ShopInfo& right);
 void sortItems(std::list<ShopInfo>& itemList);
+#ifdef __UCB_DDOS_PROTECTION__
+bool isWorldReachable();
+#endif 
 #endif

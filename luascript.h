@@ -231,7 +231,6 @@ enum PlayerInfo_t{
 	PlayerInfoGUID,
 	PlayerInfoPremiumDays,
 	PlayerInfoSkullType,
-	PlayerInfoGhostStatus
 };
 
 #define reportErrorFunc(a)  reportError(__FUNCTION__, a)
@@ -512,7 +511,6 @@ class LuaScriptInterface
 
 		//type validation
 		static int32_t luaIsPlayer(lua_State* L);
-		static int32_t luaIsPlayerGhost(lua_State* L);
 		static int32_t luaIsCreature(lua_State* L);
 		static int32_t luaIsContainer(lua_State* L);
 		static int32_t luaIsCorpse(lua_State* L);

@@ -227,9 +227,6 @@ class Player : public Creature, public Cylinder
 
 		bool isAccountManager() const {return accountManager;}
 
-		bool isInGhostMode() const {return ghostMode;}
-		void switchGhostMode() {ghostMode = !ghostMode;}
-
 		uint32_t getAccount() const {return accountNumber;}
 		AccountType_t getAccountType() const {return accountType;}
 		uint32_t getLevel() const {return level;}
@@ -718,7 +715,6 @@ class Player : public Creature, public Cylinder
 		int32_t idleTime;
 		int32_t groupId;
 		OperatingSystem_t operatingSystem;
-		bool ghostMode;
 
 		bool talkState[13], accountManager;
 		int32_t newVocation;

@@ -167,10 +167,10 @@ EXCEPTION_DISPOSITION
 	uint32_t file,foundRetAddress = 0;
 	_MEMORY_BASIC_INFORMATION mbi;
 
-if(g_config.getString(ConfigManager::EMERGENCY_SAVE) == "yes"){ 
+#ifdef __EMERGENCY__
 	Dispatcher::getDispatcher().addTask(
 		createTask(boost::bind(&Game::saveGameState, &g_game, true)));
-    }
+		#endif
 
 	std::ostream *outdriver;
 	std::cout << "Error: generating report file..." << std::endl;

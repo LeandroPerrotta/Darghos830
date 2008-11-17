@@ -1414,9 +1414,6 @@ void LuaScriptInterface::registerFunctions()
 	//isPlayer(cid)
 	lua_register(m_luaState, "isPlayer", LuaScriptInterface::luaIsPlayer);
 
-	//isPlayerGhost(cid)
-	lua_register(m_luaState, "isPlayerGhost", LuaScriptInterface::luaIsPlayerGhost);
-
 	//isCreature(cid)
 	lua_register(m_luaState, "isCreature", LuaScriptInterface::luaIsCreature);
 
@@ -1846,9 +1843,6 @@ int32_t LuaScriptInterface::internalGetPlayerInfo(lua_State* L, PlayerInfo_t inf
 			case PlayerInfoGroupId:
 				value = player->groupId;
 				break;
-			case PlayerInfoGhostStatus:
-				value = player->isInGhostMode();
-				break;
 			default:
 				std::string error_str = "Unknown player info. info = " + info;
 				reportErrorFunc(error_str);
@@ -1942,9 +1936,6 @@ int32_t LuaScriptInterface::luaGetPlayerPremiumDays(lua_State* L){
 
 int32_t LuaScriptInterface::luaGetPlayerSkullType(lua_State* L){
 	return internalGetPlayerInfo(L, PlayerInfoSkullType);}
-
-int32_t LuaScriptInterface::luaIsPlayerGhost(lua_State* L){
-	return internalGetPlayerInfo(L, PlayerInfoGhostStatus);}
 //
 
 int32_t LuaScriptInterface::luaGetPlayerFlagValue(lua_State* L)

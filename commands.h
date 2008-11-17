@@ -84,7 +84,6 @@ class Commands
 #ifdef __ENABLE_SERVER_DIAGNOSTIC__
 		bool serverDiag(Creature* creature, const std::string& cmd, const std::string& param);
 #endif
-		bool ghost(Creature* creature, const std::string& cmd, const std::string& param);
 
 		//table of commands
 		static s_defcommands defined_commands[];

@@ -478,6 +478,10 @@ class Game
 		void internalCreatureChangeVisible(Creature* creature, bool visible);
 		void changeLight(const Creature* creature);
 		void updateCreatureSkull(Player* player);
+		
+		#ifdef __UCB_DDOS_PROTECTION__
+        bool isOutSideWorldResponding();
+       #endif  
 
 		void sendPublicSquare(Player* sender, SquareColor_t color);
 
@@ -507,8 +511,8 @@ class Game
 			const std::string& text);
 		void addAnimatedText(const SpectatorVec& list, const Position& pos, uint8_t textColor,
 			const std::string& text);
-		void addMagicEffect(const Position& pos, uint8_t effect, bool ghostMode = false);
-		void addMagicEffect(const SpectatorVec& list, const Position& pos, uint8_t effect, bool ghostMode = false);
+		void addMagicEffect(const Position& pos, uint8_t effect);
+		void addMagicEffect(const SpectatorVec& list, const Position& pos, uint8_t effect);
 		void addDistanceEffect(const Position& fromPos, const Position& toPos,
 		uint8_t effect);
 
@@ -589,6 +593,12 @@ class Game
 
 		uint32_t maxPlayers;
 		uint32_t inFightTicks;
+		
+		#ifdef __UCB_DDOS_PROTECTION__
+    bool connectionTestOk;
+       uint32_t connectionTestTrueValidUntil;
+       uint32_t connectionTestFalseValidUntil;
+    #endif 
 
 		GameState_t gameState;
 		WorldType_t worldType;
