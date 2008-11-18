@@ -232,7 +232,7 @@ function creatureSayCallback(cid, type, msg)
 		elseif msgcontains(msg, 'first mage addon') then
 			if isPremium(cid) then
 				if getPlayerSex(cid) == 0 then
-					if getPlayerItemCount(cid,5958) >= 1 then
+					if getPlayerItemCount(cid,4842) >= 1 then
 						selfSay('Did you bring me a winning lotery ticket?')
 						talk_state = 7
 					else
@@ -256,10 +256,10 @@ function creatureSayCallback(cid, type, msg)
 		elseif msgcontains(msg, 'yes') and talk_state == 7 then
 			talk_state = 0
 			if getPlayerSex(cid) == 0 then
-				if getPlayerItemCount(cid,5958) >= 1 then
+				if getPlayerItemCount(cid,4842) >= 1 then
 					addon = getPlayerStorageValue(cid,40001)
 					if addon == -1 then
-						if doPlayerTakeItem(cid,5958,1) == 0 then
+						if doPlayerTakeItem(cid,4842,1) == 0 then
 							selfSay(addon_give)
 							doPlayerAddOutfit(cid, 141, 1)
 							setPlayerStorageValue(cid,40001,1)
@@ -348,7 +348,7 @@ function creatureSayCallback(cid, type, msg)
 		elseif msgcontains(msg, 'first summoner addon') then
 			if isPremium(cid) then
 				if getPlayerSex(cid) == 1 then
-					if getPlayerItemCount(cid,5958) >= 1 then
+					if getPlayerItemCount(cid,4842) >= 1 then
 						selfSay('Did you bring me a winning lotery ticket?')
 						talk_state = 9
 					else
@@ -372,10 +372,10 @@ function creatureSayCallback(cid, type, msg)
 		elseif msgcontains(msg, 'yes') and talk_state == 9 then
 			talk_state = 0
 			if getPlayerSex(cid) == 1 then
-				if getPlayerItemCount(cid,5958) >= 1 then
+				if getPlayerItemCount(cid,4842) >= 1 then
 					addon = getPlayerStorageValue(cid,50001)
 					if addon == -1 then
-						if doPlayerTakeItem(cid,5958,1) == 0 then
+						if doPlayerTakeItem(cid,4842,1) == 0 then
 							selfSay(addon_give)
 							doPlayerAddOutfit(cid, 133, 1)
 							setPlayerStorageValue(cid,50001,1)

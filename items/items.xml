@@ -1,4 +1,4 @@
-	<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <items>
 	<item id="100" name="void">
 	</item>
@@ -12531,10 +12531,10 @@
 	<item id="4840" article="a" name="small mushroom">
 		<attribute key="weight" value="100"/>
 	</item>
-	<item id="4842" article="a" name="parchment">
+	<item id="4842" article="a" name="winning lottery ticket">
+		<attribute key="description" value="You were lucky! Go claim your prize at the potion store."/>
 		<attribute key="weight" value="100"/>
-		<attribute key="writeable" value="1"/>
-		<attribute key="maxTextLen" value="512"/>
+		<attribute key="writeable" value="0"/>
 	</item>
 	<item id="4843" article="a" name="giant ape's hair">
 		<attribute key="weight" value="2000"/>
@@ -24123,11 +24123,10 @@
 	<item id="8880">
 	</item>
 	<item id="8881" article="a" name="fireborn giant armor">
-		<attribute key="description" value="It has 5% fire protection, but also increases damage taken from ice by 5% and sword +2."/>
+		<attribute key="description" value="It has 5% fire protection, but also increases damage taken from ice by 5%."/>
 		<attribute key="weight" value="12000"/>
 		<attribute key="armor" value="15"/>
 		<attribute key="absorbPercentFire" value="5"/>
-		<attribute key="skillSword" value="2"/>
 		<attribute key="absorbPercentIce" value="-5"/>
 		<attribute key="slotType" value="body"/>
 	</item>
