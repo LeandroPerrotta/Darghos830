@@ -5162,8 +5162,8 @@ bool Game::playerReportBug(uint32_t playerId, std::string bug)
 }
 
 #ifdef __UCB_DDOS_PROTECTION__
-
-bool Game::isOutSideWorldResponding(){
+bool Game::isOutSideWorldResponding()
+{
      if(g_config.getString(ConfigManager::DDOS_PROTECTION) == "yes")
 	{
     uint32_t now = std::time(NULL);

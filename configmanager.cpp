@@ -52,13 +52,13 @@ bool ConfigManager::loadFile(const std::string& _filename)
 		m_confString[IP] = getGlobalString(L, "ip", "127.0.0.1");
 		m_confInteger[PORT] = getGlobalNumber(L, "port", 7171);
 		m_confInteger[SQL_PORT] = getGlobalNumber(L, "mysqlPort", 3306);
-		m_confString[MAP_NAME] = getGlobalString(L, "mapName", "forgotten");
+		m_confString[MAP_NAME] = getGlobalString(L, "mapName", "darghos");
 		m_confString[MAP_AUTHOR] = getGlobalString(L, "mapAuthor", "Unknown");
 		m_confString[HOUSE_RENT_PERIOD] = getGlobalString(L, "houseRentPeriod", "monthly");
 		m_confString[MYSQL_HOST] = getGlobalString(L, "mysqlHost", "localhost");
 		m_confString[MYSQL_USER] = getGlobalString(L, "mysqlUser", "root");
 		m_confString[MYSQL_PASS] = getGlobalString(L, "mysqlPass", "");
-		m_confString[MYSQL_DB] = getGlobalString(L, "mysqlDatabase", "theforgottenserver");
+		m_confString[MYSQL_DB] = getGlobalString(L, "mysqlDatabase", "newot");
 		m_confString[SQLITE_DB] = getGlobalString(L, "sqliteDatabase");
 		#if defined __USE_MYSQL__ && defined __USE_SQLITE__
 		m_confString[SQL_TYPE] = getGlobalString(L, "sqlType");
@@ -74,13 +74,13 @@ bool ConfigManager::loadFile(const std::string& _filename)
 		m_confString[INGAME_GUILD_SYSTEM] = getGlobalString(L, "ingameGuildSystem", "yes");
 	}
 
-	m_confString[LOGIN_MSG] = getGlobalString(L, "loginMessage", "Welcome to the Forgotten Server!");
+	m_confString[LOGIN_MSG] = getGlobalString(L, "loginMessage", "Welcome to the Darghos Server!");
 	m_confString[SERVER_NAME] = getGlobalString(L, "serverName");
 	m_confString[OWNER_NAME] = getGlobalString(L, "ownerName");
 	m_confString[OWNER_EMAIL] = getGlobalString(L, "ownerEmail");
 	m_confString[URL] = getGlobalString(L, "url");
 	m_confString[LOCATION] = getGlobalString(L, "location");
-	m_confInteger[LOGIN_TRIES] = getGlobalNumber(L, "loginTries", 3);
+	m_confInteger[LOGIN_TRIES] = getGlobalNumber(L, "loginTries", 4);
 	m_confInteger[RETRY_TIMEOUT] = getGlobalNumber(L, "retryTimeout", 30 * 1000);
 	m_confInteger[LOGIN_TIMEOUT] = getGlobalNumber(L, "loginTimeout", 5 * 1000);
 	m_confString[MOTD] = getGlobalString(L, "motd");
@@ -105,8 +105,8 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[START_MAGICLEVEL] = getGlobalNumber(L, "newPlayerMagicLevel", 0);
 	m_confString[START_CHOOSEVOC] = getGlobalString(L, "newPlayerChooseVoc", "no");
 	m_confInteger[HOUSE_PRICE] = getGlobalNumber(L, "housePriceEachSQM", 1000);
-	m_confInteger[KILLS_TO_RED] = getGlobalNumber(L, "killsToRedSkull", 3);
-	m_confInteger[KILLS_TO_BAN] = getGlobalNumber(L, "killsToBan", 5);
+	m_confInteger[KILLS_TO_RED] = getGlobalNumber(L, "killsToRedSkull", 5);
+	m_confInteger[KILLS_TO_BAN] = getGlobalNumber(L, "killsToBan", 7);
 	m_confInteger[BAN_DAYS] = getGlobalNumber(L, "banDays", 7);
 	m_confInteger[FINAL_BAN_DAYS] = getGlobalNumber(L, "finalBanDays", 30);
 	m_confInteger[HIGHSCORES_TOP] = getGlobalNumber(L, "highscoreDisplayPlayers", 10);
