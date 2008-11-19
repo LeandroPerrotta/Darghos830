@@ -24127,6 +24127,7 @@
 		<attribute key="weight" value="12000"/>
 		<attribute key="armor" value="15"/>
 		<attribute key="absorbPercentFire" value="5"/>
+		<attribute key="skillSword" value="2"/>
 		<attribute key="absorbPercentIce" value="-5"/>
 		<attribute key="slotType" value="body"/>
 	</item>
