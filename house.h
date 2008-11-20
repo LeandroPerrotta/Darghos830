@@ -39,7 +39,7 @@ class AccessList
 {
 	public:
 		AccessList();
-		~AccessList();
+		virtual ~AccessList();
 
 		bool parseList(const std::string& _list);
 		bool addPlayer(std::string& name);
@@ -53,9 +53,9 @@ class AccessList
 	private:
 		typedef OTSERV_HASH_SET<uint32_t> PlayerList;
 		typedef OTSERV_HASH_SET<uint32_t> GuildList; //TODO: include ranks
-
 		typedef std::list<std::string> ExpressionList;
 		typedef std::list<std::pair<boost::regex, bool> > RegExList;
+		
 		std::string list;
 		PlayerList playerList;
 		GuildList guildList;
@@ -72,7 +72,7 @@ class Door : public Item
 		virtual Door* getDoor() {return this;}
 		virtual const Door* getDoor() const {return this;}
 
-		House* getHouse(){return house;}
+		House* getHouse() {return house;}
 
 		//serialization
 		virtual bool unserialize(xmlNodePtr p);
@@ -141,14 +141,12 @@ class House
 {
 	public:
 		House(uint32_t _houseid);
-		~House();
+		virtual ~House();
+		uint32_t getHouseId() const {return houseid;}
 
 		void addTile(HouseTile* tile);
 
 		bool canEditAccessList(uint32_t listId, const Player* player);
-		// listId special values:
-		//	GUEST_LIST	 guest list
-		//  SUBOWNER_LIST subowner list
 		void setAccessList(uint32_t listId, const std::string& textlist);
 		bool getAccessList(uint32_t listId, std::string& list) const;
 
@@ -171,6 +169,9 @@ class House
 
 		void setRent(uint32_t _rent){rent = _rent;}
 		uint32_t getRent() const {return rent;}
+		
+		void setLastWarning(uint32_t _lastWarning) {lastWarning = _lastWarning;}
+		uint32_t getLastWarning() {return lastWarning;}
 
 		void setPayRentWarnings(uint32_t warnings) {rentWarnings = warnings;}
 		uint32_t getPayRentWarnings() const {return rentWarnings;}
@@ -178,7 +179,6 @@ class House
 		void setTownId(uint32_t _town){townid = _town;}
 		uint32_t getTownId() const {return townid;}
 
-		uint32_t getHouseId() const {return houseid;}
 
 		void addDoor(Door* door);
 		void removeDoor(Door* door);
@@ -200,10 +200,11 @@ class House
 		void addBed(BedItem* bed);
 		HouseBedItemList::iterator getHouseBedsBegin() {return bedsList.begin();}
 		HouseBedItemList::iterator getHouseBedsEnd() {return bedsList.end();}
+		
 
 	private:
+        bool transferToDepot();
 		void updateDoorDescription();
-		bool transferToDepot();
 
 		bool isLoaded;
 		uint32_t houseid;
@@ -218,6 +219,7 @@ class House
 		Position posEntry;
 		uint32_t paidUntil;
 		uint32_t rentWarnings;
+		uint32_t lastWarning;
 		uint32_t rent;
 		uint32_t townid;
 
@@ -265,6 +267,8 @@ class Houses
 		}
 
 		House* getHouseByPlayerId(uint32_t playerId);
+		
+		uint32_t getHousesCount(uint32_t accId) const;
 
 		bool loadHousesXML(std::string filename);
 

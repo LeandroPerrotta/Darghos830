@@ -833,7 +833,7 @@ bool Commands::setHouseOwner(Creature* creature, const std::string& cmd, const s
 		{
 			HouseTile* houseTile = dynamic_cast<HouseTile*>(player->getTile());
 			if(houseTile)
-			{
+			{                      
 				uint32_t guid;
 				std::string name = param;
 				if(name == "none")
@@ -963,6 +963,16 @@ bool Commands::buyHouse(Creature* creature, const std::string& cmd, const std::s
 				return false;
 			}
 		}
+		
+		uint16_t housesPerAccount = g_config.getNumber(ConfigManager::HOUSES_PER_ACCOUNT);
+		if(housesPerAccount > 0 && Houses::getInstance().getHousesCount(player->getAccount()) >= housesPerAccount)
+		{
+			char buffer[80];
+			sprintf(buffer, "You may own only %d house%s per account.", housesPerAccount, (housesPerAccount != 1 ? "s" : ""));
+			player->sendCancel(buffer);
+			return false;
+		}
+		
 		if(Tile* tile = g_game.getTile(pos.x, pos.y, pos.z))
 		{
 			if(HouseTile* houseTile = dynamic_cast<HouseTile*>(tile))

@@ -94,7 +94,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[RATE_LOOT] = getGlobalNumber(L, "rateLoot", 1);
 	m_confInteger[RATE_MAGIC] = getGlobalNumber(L, "rateMagic", 1);
 	m_confInteger[RATE_SPAWN] = getGlobalNumber(L, "rateSpawn", 1);
-	m_confInteger[HOTKEYS] = getGlobalNumber(L, "enablehotkeys", 0);
+	m_confInteger[HOTKEYS] = getGlobalNumber(L, "enableHotkeys", 1);
 	m_confInteger[SPAWNPOS_X] = getGlobalNumber(L, "newPlayerSpawnPosX", 100);
 	m_confInteger[SPAWNPOS_Y] = getGlobalNumber(L, "newPlayerSpawnPosY", 100);
 	m_confInteger[SPAWNPOS_Z] = getGlobalNumber(L, "newPlayerSpawnPosZ", 7);
@@ -105,7 +105,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[START_MAGICLEVEL] = getGlobalNumber(L, "newPlayerMagicLevel", 0);
 	m_confString[START_CHOOSEVOC] = getGlobalString(L, "newPlayerChooseVoc", "no");
 	m_confInteger[HOUSE_PRICE] = getGlobalNumber(L, "housePriceEachSQM", 1000);
-	m_confInteger[KILLS_TO_RED] = getGlobalNumber(L, "killsToRedSkull", 5);
+	m_confInteger[KILLS_TO_RED ] = getGlobalNumber(L, "killsToRedSkull", 5);
 	m_confInteger[KILLS_TO_BAN] = getGlobalNumber(L, "killsToBan", 7);
 	m_confInteger[BAN_DAYS] = getGlobalNumber(L, "banDays", 7);
 	m_confInteger[FINAL_BAN_DAYS] = getGlobalNumber(L, "finalBanDays", 30);
@@ -133,6 +133,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confString[ADMIN_LOGS_ENABLED] = getGlobalString(L, "adminLogsEnabled", "no");
 	m_confInteger[DEATH_LOSE_PERCENT] = getGlobalNumber(L, "deathLosePercent", 10);
 	m_confInteger[STATUSQUERY_TIMEOUT] = getGlobalNumber(L, "statusTimeout", 5 * 60 * 1000);
+	m_confInteger[HOUSES_PER_ACCOUNT] = getGlobalNumber(L, "housesPerAccount", 1);
 	m_confString[BROADCAST_BANISHMENTS] = getGlobalString(L, "broadcastBanishments", "yes");
 	m_confString[GENERATE_ACCOUNT_NUMBER] = getGlobalString(L, "generateAccountNumber", "yes");
 	m_confInteger[FRAG_TIME] = getGlobalNumber(L, "timeToDecreaseFrags", 24 * 60 * 60 * 1000);

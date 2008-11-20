@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "game.h"
+#include "house.h"
 
 #include "iologindata.h"
 
@@ -505,6 +506,12 @@ void mainLoader()
 		if(!ignoreEvent && (hoursLeftInMS + minutesLeftInMS) > 0)
 			Scheduler::getScheduler().addEvent(createSchedulerTask(hoursLeftInMS + minutesLeftInMS, boost::bind(&Game::prepareServerSave, &g_game)));
 	}
+	
+	std::cout << ">> Paying Houses" << std::endl;
+	#ifndef __CONSOLE__
+	SendMessage(gui.m_statusBar, WM_SETTEXT, 0, (LPARAM)">> Paying Houses");
+	#endif
+	Houses::getInstance().payHouses();
 
 	std::cout << ">> All modules has been loaded, server starting up..." << std::endl;
 
