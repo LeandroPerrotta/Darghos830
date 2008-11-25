@@ -9,13 +9,11 @@ function onUse(cid, item, frompos, item2, topos)
 	elevadorPos = {x = 1912, y = 1230, z = 10, stackpos=1} -- posição aonde será criado/deletado o teleport do elevador
 
 	if item.uid == uniqueID and item.itemid == 1945 then
-		print("O jogador " .. getPlayerName(cid) .. " subiu no elevador.")
 		doRemoveItem(getThingfromPos(elevadorPos).uid)
 		doCreateTeleport(1387,firstFloor,elevadorPos)
 		doTransformItem(item.uid,item.itemid+1)
 		doPlayerSendTextMessage(cid,22,'Agora o elevador irá subir.')
 	elseif item.uid == uniqueID and item.itemid == 1946 then
-		print("O jogador " .. getPlayerName(cid) .. " deceu no elevador.")
 		doRemoveItem(getThingfromPos(elevadorPos).uid)
 		doCreateTeleport(1387,thirdFloor,elevadorPos)
 		doTransformItem(item.uid,item.itemid-1)
