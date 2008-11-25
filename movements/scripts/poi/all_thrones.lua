@@ -42,7 +42,7 @@ function onStepIn(cid, item, pos)
         else
             doPlayerSendTextMessage(cid,MESSAGE_EVENT_ADVANCE,'You have already absorbed some of Ashfalor´s spirit.')
         end
-    elseif item.uid == 22222 and item.itemid == 351 then
+    elseif item.uid == 22222 and item.itemid == 5068 then
         if getPlayerStorageValue(cid,12341) == 1 
 		and getPlayerStorageValue(cid,12342) == 1 
 		and getPlayerStorageValue(cid,12343) == 1 
@@ -53,7 +53,7 @@ function onStepIn(cid, item, pos)
         
 			else			
 			doPlayerSendTextMessage(cid,MESSAGE_EVENT_ADVANCE,'Sorry, but you did not absorb enough energy!')
-			doTeleportThing(cid, {x = getPlayerPosition(cid).x + 1, y = getPlayerPosition(cid).y, z = getPlayerPosition(cid).z}, FALSE)
+			doTeleportThing(cid, {x = getPlayerPosition(cid).x, y = getPlayerPosition(cid).y + 1, z = getPlayerPosition(cid).z}, FALSE)
 		end
     end
     return 1
