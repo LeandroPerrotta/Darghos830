@@ -25,7 +25,7 @@
 <movevent event="StepIn" uniqueid="9121" script="poi/tp9.lua" />
 <movevent event="StepIn" uniqueid="3101" script="poi/tp9.lua" />
 
-<movevent event="StepIn" uniqueid="22222" script="poi/all_thrones.lua" />
+<movevent event="StepIn" uniqueid="222222" script="poi/all_thrones.lua" />
 <movevent event="StepIn" uniqueid="9035" script="poi/tperrado.lua" />
 <movevent event="StepIn" uniqueid="9036" script="poi/tperrado1.lua" />
 <movevent event="StepIn" uniqueid="9037" script="poi/tperrado2.lua" />
