@@ -42,7 +42,7 @@ function onStepIn(cid, item, pos)
         else
             doPlayerSendTextMessage(cid,MESSAGE_EVENT_ADVANCE,'You have already absorbed some of Ashfalor´s spirit.')
         end
-    elseif item.actiondid == 22222 and item.itemid == 5068 then
+    elseif item.actionid == 22222 and item.itemid == 5068 then
         if getPlayerStorageValue(cid,12341) == 1 
 		and getPlayerStorageValue(cid,12342) == 1 
 		and getPlayerStorageValue(cid,12343) == 1 
