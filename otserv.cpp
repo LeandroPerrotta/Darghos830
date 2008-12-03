@@ -511,7 +511,7 @@ void mainLoader()
 	#ifndef __CONSOLE__
 	SendMessage(gui.m_statusBar, WM_SETTEXT, 0, (LPARAM)">> Paying Houses");
 	#endif
-	Houses::getInstance().payHouses();
+	Houses::getInstance().PayCheckHouses();
 
 	std::cout << ">> All modules has been loaded, server starting up..." << std::endl;
 

@@ -843,10 +843,12 @@ bool Houses::payHouses()
 		
 	uint32_t warnLost, payLost, premLost;
     uint32_t townSkip, nameSkip, loadSkip;
-    uint32_t curTime, warnTime;
+    uint32_t warnTime;
+    uint32_t premPlayer;
 
     warnLost = 0;
     payLost = 0;
+    premPlayer = 0;
     premLost = 0;
 
     townSkip = 0;
@@ -897,6 +899,16 @@ bool Houses::payHouses()
 			
 			bool savePlayerHere = true;
 			Depot* depot = player->getDepot(town->getTownID(), true);
+			if(player->isPremium())
+                    {
+                    premPlayer++; 
+                    }
+                     else
+                     {
+                         premLost++;
+                    house->setHouseOwner(0);
+					savePlayerHere = false;
+                }
 			if(depot)
 			{                        
 				if(g_game.removeMoney(depot, house->getRent(), FLAG_NOLIMIT))
@@ -929,12 +941,6 @@ bool Houses::payHouses()
 						house->setHouseOwner(0);
 						savePlayerHere = false;
 					}       
-                    if(!player->isPremium())
-                    {
-                    premLost++; 
-                    house->setHouseOwner(0);
-					savePlayerHere = false;
-                    } 
 					else
 						{
 							std::string period = "";
@@ -988,6 +994,177 @@ bool Houses::payHouses()
 	}
 
 	std::cout << "House checking finished.\nErrors:\n - Player does not exist: " << nameSkip << "\n - Player could not be loaded: " << loadSkip << "\n - Player town does not exist: " << townSkip << "\n\n";
+    std::cout << "Information:\n - Players warned: " << warnLost << "\n - Premium players if have a house: " << premPlayer << "\n - Houses taken from free players: " << premLost << "\n - Houses taken due to no payment: " << payLost << "\n\n";
+}
+
+void Houses::PayCheckHouses(void)
+{
+    if (rentPeriod == RENTPERIOD_NEVER)
+    {
+        return;
+    }
+
+    bool save;
+    HouseMap::iterator it;
+
+    uint32_t warnLost, payLost, premLost;
+    uint32_t townSkip, nameSkip, loadSkip;
+    uint32_t curTime, warnTime;
+
+    warnLost = 0;
+    payLost = 0;
+    premLost = 0;
+
+    townSkip = 0;
+    nameSkip = 0;
+    loadSkip = 0;
+
+    curTime = time(NULL);
+
+    for (it = houseMap.begin(); it != houseMap.end(); it++)
+    {
+        House* house;
+
+        house = it->second;
+
+        if (house->getHouseOwner() != 0 && house->getRent() != 0)
+        {
+            warnTime = (curTime - ((2 - house->getPayRentWarnings()) * 24 * 60 * 60));
+
+            if (house->getPaidUntil() < curTime || house->getPaidUntil() < warnTime)
+            {
+                Town* town;
+                uint32_t oid;
+
+                town = Towns::getInstance().getTown(house->getTownId());
+                oid = house->getHouseOwner();
+
+                if (town == NULL)
+                {
+                    townSkip++;
+
+                    continue;
+                }
+
+                std::string name;
+
+                if (!IOLoginData::getInstance()->getNameByGuid(oid, name))
+                {
+                    nameSkip++;
+                    house->setHouseOwner(0);
+
+                    continue;
+                }
+
+                Player* player;
+
+                player = g_game.getPlayerByName(name);
+
+                if (player == NULL)
+                {
+                    save = true;
+                    player = new Player(name, NULL);
+
+                    if (!IOLoginData::getInstance()->loadPlayer(player, name))
+                    {
+                        delete player;
+                        loadSkip++;
+
+                        continue;
+                    }
+                }
+                else
+                {
+                    save = false;
+                }
+
+                Depot* depot = player->getDepot(town->getTownID(), true);
+
+                if (!player->isPremium())
+                {
+                    char buffer[0x180];
+                    Item* letter;
+
+                    sprintf(buffer, "Olá, %s.\nEstamos enviando está carta para lhe comunicar que a sua casa, \"%s\", localizada em %s, foi desocupada por que sua premium account expirou.\n\nTenha um bom jogo,\nEquipe UltraxSoft.", name.c_str(), house->getName().c_str(), town->getName().c_str());
+
+                    letter = Item::CreateItem(ITEM_LETTER_STAMPED);
+                    letter->setText(buffer);
+
+                    g_game.internalAddItem(depot, letter, INDEX_WHEREEVER, FLAG_NOLIMIT);
+
+                    premLost++;
+
+                    house->setHouseOwner(0);
+                    house->setPayRentWarnings(0);
+                }
+                else if (g_game.getMoney(depot) < house->getRent())
+                {
+                    char buffer[0x100];
+                    Item* letter;
+
+                    letter = Item::CreateItem(ITEM_LETTER_STAMPED);
+
+                    if (house->getPayRentWarnings() >= 2)
+                    {
+                        sprintf(buffer, "Olá, %s.\nEstamos enviando esta carta para lhe comunicar que a sua casa, \"%s\", localizada em %s, foi desocupada devido ao não pagamento do aluguel semanal no valor de %d gold coin%s.\n\nTenha um bom jogo,\nEquipe UltraxSoft.", name.c_str(), house->getName().c_str(), town->getName().c_str(), house->getRent(), ((house->getRent() > 1) ? "s" : ""));
+
+                        payLost++;
+
+                        house->setHouseOwner(0);
+                        house->setPayRentWarnings(0);
+                    }
+                    else
+                    {
+                        uint32_t daysLeft;
+
+                        daysLeft = (2 - house->getPayRentWarnings());
+                        sprintf(buffer, "Olá, %s.\nEstamos enviando esta carta para lhe comunicar que sua casa, \"%s\", localizada em %s, será desocupada se você não possuir a quantia de %d gold coin%s em %d dia%s.\n\nTenha um bom jogo,\nEquipe UltraxSoft.", name.c_str(), house->getName().c_str(), town->getName().c_str(), house->getRent(), ((house->getRent() > 1) ? "s" : ""), daysLeft, ((daysLeft > 1) ? "s" : ""));
+
+                        warnLost++;
+
+                        house->setPayRentWarnings((house->getPayRentWarnings() + 1));
+                    }
+
+                    letter->setText(buffer);
+                    g_game.internalAddItem(depot, letter, INDEX_WHEREEVER, FLAG_NOLIMIT);
+                }
+                else
+                {
+                    if(house->getPaidUntil() < curTime)
+                    {
+                        uint32_t paidUntil;
+
+                        paidUntil = curTime;
+                        paidUntil += (7 * 24 * 60 * 60);
+
+                        g_game.removeMoney(depot, house->getRent(), FLAG_NOLIMIT);
+                        house->setPaidUntil(paidUntil);
+                        house->setPayRentWarnings(0);
+                    }
+                    else
+                    {
+                        uint32_t daysLeft;
+
+                        daysLeft = ((house->getPaidUntil() - curTime) / (24 * 60 * 60));
+
+                        if (daysLeft <= 2)
+                        {
+                            house->setPayRentWarnings((2 - daysLeft));
+                        }
+                    }
+                }
+
+                if (save)
+                {
+                    IOLoginData::getInstance()->savePlayer(player, true);
+
+                    delete player;
+                }
+            }
+        }
+    }
+
+    std::cout << "House checking finished.\nErrors:\n - Player does not exist: " << nameSkip << "\n - Player could not be loaded: " << loadSkip << "\n - Player town does not exist: " << townSkip << "\n\n";
     std::cout << "Information:\n - Players warned: " << warnLost << "\n - Houses taken from free players: " << premLost << "\n - Houses taken due to no payment: " << payLost << "\n\n";
 }
 

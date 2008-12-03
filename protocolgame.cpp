@@ -418,7 +418,7 @@ bool ProtocolGame::login(const std::string& name, uint32_t accnumber, const std:
 	}
 	else
 	{
-		if(eventConnect != 0)
+		       if(eventConnect != 0)
 		{
 			//Already trying to connect
 			disconnectClient(0x14, "Your already logged in.");

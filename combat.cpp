@@ -360,7 +360,7 @@ ReturnValue Combat::canDoCombat(const Creature* attacker, const Creature* target
 				if(attackerPlayer->hasFlag(PlayerFlag_CannotAttackPlayer))
 					return RET_YOUMAYNOTATTACKTHISPLAYER;
 					
-			if(attackerPlayer->getLevel() < g_config.getNumber(ConfigManager::MIN_PKING_LEVEL) && targetPlayer->getSkull() == SKULL_NONE && !targetPlayer->hasAttacked(attackerPlayer))
+			      if(attackerPlayer->getLevel() < g_config.getNumber(ConfigManager::MIN_PKING_LEVEL) && targetPlayer->getSkull() == SKULL_NONE && !targetPlayer->hasAttacked(attackerPlayer))
                     return RET_YOUMAYNOTATTACKTHISPLAYER;
 
 			/*if(isProtected(attackerPlayer, targetPlayer))

@@ -3575,13 +3575,13 @@ void Player::onKilledCreature(Creature* target)
 				targetPlayer->getSkull() == SKULL_NONE)
 			{
 				addUnjustifiedDead(targetPlayer);
-			}
 			
 				if (Combat::isProtected(targetPlayer))
                 {
                     targetPlayer->setProtectedDeath(true);
                     targetPlayer->setDropLoot(false);
                 }
+}
 
 			if(!Combat::isInPvpZone(this, targetPlayer) && hasCondition(CONDITION_INFIGHT))
 			{

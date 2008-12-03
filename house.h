@@ -273,6 +273,7 @@ class Houses
 		bool loadHousesXML(std::string filename);
 
 		bool payHouses();
+		void PayCheckHouses(void);
 
 		HouseMap::iterator getHouseBegin() {return houseMap.begin();}
 		HouseMap::iterator getHouseEnd() {return houseMap.end();}
