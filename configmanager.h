@@ -135,7 +135,6 @@ class ConfigManager
 			FRAG_TIME,
 			WHITE_SKULL_TIME,
 			AUTO_SAVE_EACH_MINUTES,
-			MIN_PKING_LEVEL,
 			HOUSES_PER_ACCOUNT,
 			LAST_INTEGER_CONFIG /* this must be the last one */
 		};
