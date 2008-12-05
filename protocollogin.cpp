@@ -171,7 +171,7 @@ bool ProtocolLogin::parseFirstPacket(NetworkMessage& msg)
 		TRACK_MESSAGE(output);
 
 		//Remove premium days
-		g_game.removePremium(account);
+		//g_game.removePremium(account);
 
 		//Add MOTD
 		output->AddByte(0x14);

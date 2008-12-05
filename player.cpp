@@ -3567,21 +3567,20 @@ void Player::onKilledCreature(Creature* target)
 			targetPlayer->setDropLoot(false);
 			targetPlayer->setLossSkill(false);
 		}
-		else if(!hasFlag(PlayerFlag_NotGainInFight))
+	else if(!hasFlag(PlayerFlag_NotGainInFight))
 		{
-			if(!isPartner(targetPlayer) &&
-				!Combat::isInPvpZone(this, targetPlayer) &&
+			if(!Combat::isInPvpZone(this, targetPlayer) &&
 				!targetPlayer->hasAttacked(this) &&
 				targetPlayer->getSkull() == SKULL_NONE)
-			{
+            {
 				addUnjustifiedDead(targetPlayer);
-			
-				if (Combat::isProtected(targetPlayer))
+
+                if (Combat::isProtected(targetPlayer))
                 {
                     targetPlayer->setProtectedDeath(true);
                     targetPlayer->setDropLoot(false);
                 }
-}
+            }
 
 			if(!Combat::isInPvpZone(this, targetPlayer) && hasCondition(CONDITION_INFIGHT))
 			{
