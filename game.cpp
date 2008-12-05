@@ -70,11 +70,6 @@ extern Vocations g_vocations;
 
 Game::Game()
 {
-    #ifdef __UCB_DDOS_PROTECTION__
-    connectionTestFalseValidUntil = std::time(NULL) + 2*60; //Ignore verification in first 2 minutes
-       connectionTestTrueValidUntil = connectionTestFalseValidUntil;
-    connectionTestOk = true;
-    #endif  
 	gameState = GAME_STATE_NORMAL;
 	worldType = WORLD_TYPE_PVP;
 	map = NULL;
@@ -5157,28 +5152,4 @@ bool Game::playerReportBug(uint32_t playerId, std::string bug)
 	player->sendTextMessage(MSG_EVENT_DEFAULT, "Your report has been sent to " + g_config.getString(ConfigManager::SERVER_NAME) + ".");
 	return true;
 }
-
-#ifdef __UCB_DDOS_PROTECTION__
-bool Game::isOutSideWorldResponding()
-{
-     if(g_config.getString(ConfigManager::DDOS_PROTECTION) == "yes")
-	{
-    uint32_t now = std::time(NULL);
-    if( !connectionTestOk ){
-        if( now > connectionTestFalseValidUntil ){
-            //Redo test
-            connectionTestOk = isWorldReachable();
-            connectionTestFalseValidUntil = now + 60; //False result is valid for 60 seconds
-        }
-    } else {
-        if( now > connectionTestTrueValidUntil ){
-            //Redo test
-            connectionTestOk = isWorldReachable();
-            connectionTestTrueValidUntil = now + 10; //Ok result is valid for 10 secongs
-        }
-    }
-    return connectionTestOk;
-}
-}
-#endif  
 

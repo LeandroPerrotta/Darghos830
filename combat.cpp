@@ -89,6 +89,7 @@ bool Combat::getMinMaxValues(Creature* creature, Creature* target, int32_t& min,
 					const Weapon* weapon = g_weapons->getWeapon(tool);
 
 					min = (int32_t)minb;
+
 					if(weapon)
 					{
 						max = (int32_t)(weapon->getWeaponDamage(player, target, tool, true) * maxa + maxb);
@@ -268,16 +269,18 @@ ReturnValue Combat::canTargetCreature(const Player* player, const Creature* targ
 		else
 			return RET_YOUMAYNOTATTACKTHISCREATURE;
 	}
-	
-		if(target->getPlayer() && target->getPlayer()->getVocationId() == 0)
-		return RET_YOUMAYNOTATTACKTHISPLAYER;
 
-if(player->getSecureMode() == SECUREMODE_ON && target->getPlayer() &&
-		target->getPlayer()->getSkullClient(player) == SKULL_NONE && !Combat::isInPvpZone(player, target))
+	if(target->getPlayer())
 	{
-		return RET_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
-	}
+		if(isProtected(player, target->getPlayer()))
+			return RET_YOUMAYNOTATTACKTHISPLAYER;
 
+		if(player->getSecureMode() == SECUREMODE_ON && !Combat::isInPvpZone(player, target) &&
+			player->getSkullClient(target->getPlayer()) == SKULL_NONE)
+		{
+			return RET_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
+		}
+	}
 	return Combat::canDoCombat(player, target);
 }
 
@@ -325,22 +328,16 @@ bool Combat::isInPvpZone(const Creature* attacker, const Creature* target)
 	return true;
 }
 
-bool Combat::isProtected(const Player* player)
-{
-    uint32_t protectionLevel = g_config.getNumber(ConfigManager::PROTECTION_LEVEL);
-
-    if (player->getLevel() < protectionLevel)
-    {
-        return true;
-    }
-
-    return false;
-}
-
 bool Combat::isProtected(const Player* attacker, const Player* target)
 {
 	uint32_t protectionLevel = g_config.getNumber(ConfigManager::PROTECTION_LEVEL);
 	if(target->getLevel() < protectionLevel || attacker->getLevel() < protectionLevel)
+		return true;
+
+	if(attacker->getVocationId() == 0 || target->getVocationId() == 0)
+		return true;
+
+	if(attacker->getName() == "Account Manager" || target->getName() == "Account Manager")
 		return true;
 
 	return false;

@@ -347,7 +347,6 @@ class Creature : public AutoID, virtual public Thing
 		uint32_t getSummonCount() const {return summons.size();}
 		void setDropLoot(bool _lootDrop) {lootDrop = _lootDrop;}
 		void setLossSkill(bool _skillLoss) {skillLoss = _skillLoss;}
-		void setProtectedDeath(bool _protectedDeath) {protectedDeath = _protectedDeath;}
 
 		//creature script events
 		bool registerCreatureEvent(const std::string& name);
@@ -397,7 +396,6 @@ class Creature : public AutoID, virtual public Thing
 		int32_t varSpeed;
 		bool skillLoss;
 		bool lootDrop;
-		bool protectedDeath;
 		Direction direction;
 		ConditionList conditions;
 		LightInfo internalLight;

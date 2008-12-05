@@ -479,10 +479,6 @@ class Game
 		void changeLight(const Creature* creature);
 		void updateCreatureSkull(Player* player);
 		
-		#ifdef __UCB_DDOS_PROTECTION__
-        bool isOutSideWorldResponding();
-       #endif  
-
 		void sendPublicSquare(Player* sender, SquareColor_t color);
 
 		GameState_t getGameState();
@@ -593,12 +589,6 @@ class Game
 
 		uint32_t maxPlayers;
 		uint32_t inFightTicks;
-		
-		#ifdef __UCB_DDOS_PROTECTION__
-    bool connectionTestOk;
-       uint32_t connectionTestTrueValidUntil;
-       uint32_t connectionTestFalseValidUntil;
-    #endif 
 
 		GameState_t gameState;
 		WorldType_t worldType;

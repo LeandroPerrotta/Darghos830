@@ -54,7 +54,6 @@ Creature::Creature() :
 	master = NULL;
 	lootDrop = true;
 	skillLoss = true;
-	protectedDeath = false;
 
 	health     = 1000;
 	healthMax  = 1000;

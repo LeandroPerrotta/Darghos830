@@ -2128,13 +2128,8 @@ void Player::death()
 
 	loginPosition = masterPos;
 
-	#ifdef __UCB_DDOS_PROTECTION__
-if(skillLoss && g_game.isOutSideWorldResponding()){
-#else
-if(skillLoss){
-#endif  
-      if(!protectedDeath)
-        {
+	if(skillLoss)
+	{
 		//Magic level loss
 		uint32_t sumMana = 0;
 		uint64_t lostMana = 0;
@@ -2155,11 +2150,7 @@ if(skillLoss){
 		}
 
 		manaSpent -= std::max((int32_t)0, (int32_t)lostMana);
-		uint64_t nextReqMana = vocation->getReqMana(magLevel + 1);
-		if(nextReqMana > vocation->getReqMana(magLevel))
-			magLevelPercent = Player::getPercentLevel(manaSpent, nextReqMana);
-		else
-			magLevelPercent = 0;
+		magLevelPercent = Player::getPercentLevel(manaSpent, vocation->getReqMana(magLevel + 1));
 
 		//Skill loss
 		uint32_t lostSkillTries;
@@ -2211,18 +2202,13 @@ if(skillLoss){
 		}
 
 		uint64_t currLevelExp = Player::getExpForLevel(newLevel);
-		uint64_t nextLevelExp = Player::getExpForLevel(newLevel + 1);
-		if(nextLevelExp > currLevelExp)
-			levelPercent = Player::getPercentLevel(experience - currLevelExp - getLostExperience(), nextLevelExp - currLevelExp);
-		else
-			levelPercent = 0;
+		levelPercent = Player::getPercentLevel(experience - currLevelExp - getLostExperience(), Player::getExpForLevel(newLevel + 1) - currLevelExp);
 
 		if(!inventory[SLOT_BACKPACK])
 			__internalAddThing(SLOT_BACKPACK, Item::CreateItem(1987));
 
 		sendReLoginWindow();
 	}
-}
 
 	sendStats();
 	sendSkills();
@@ -2265,21 +2251,9 @@ void Player::preSave()
 {
 	if(health <= 0)
 	{
-		#ifdef __UCB_DDOS_PROTECTION__
-if(skillLoss && g_game.isOutSideWorldResponding()){
-#else
-if(skillLoss)
-#endif 
-{
-          if(!protectedDeath)
-            {
-			#ifdef __UCB_DDOS_PROTECTION__
-if( g_game.isOutSideWorldResponding() ){
-     experience -= getLostExperience();
-}
-#else
-experience -= getLostExperience();
-#endif 
+		if(skillLoss)
+		{
+			experience -= getLostExperience();
 			while(level > 1 && experience < Player::getExpForLevel(level))
 			{
 				--level;
@@ -2293,8 +2267,6 @@ experience -= getLostExperience();
 
 		health = healthMax;
 	}
-}
-}
 }
 
 void Player::addWeaponExhaust(uint32_t ticks)
