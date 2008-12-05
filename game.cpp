@@ -4553,9 +4553,6 @@ void Game::checkShutdown(int minutes)
 					(*it).second->kickPlayer(true);
 					it = Player::listPlayer.list.begin();
 				}
-				
-		Dispatcher::getDispatcher().addTask(
-		createTask(boost::bind(&Game::saveGameState, this, true)));
 
 		std::cout << ":: Shutting down Server..." << std::endl;
 		OTSYS_SLEEP(1500);
