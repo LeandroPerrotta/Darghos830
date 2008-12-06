@@ -52,23 +52,7 @@
   <movevent event="StepIn" itemid="5916" script="poi/all_thrones.lua" />
   <movevent event="StepIn" itemid="6488" script="poi/all_thrones.lua" />
   <movevent event="AddItem" itemid="1903" script="poi/scarab coin.lua" />
-  <movevent event="StepIn" actionid="7778" script="poi/pisodanosul.lua" />
-  <movevent event="StepIn" actionid="7780" script="poi/pisodanosudeste.lua" />
-  <movevent event="StepIn" actionid="7781" script="poi/pisodanonorte.lua" />
-  <movevent event="StepIn" actionid="7782" script="poi/pisodanonordeste.lua" />
-
-  <movevent event="StepIn" actionid="6668" script="poi/pisodanosul1.lua" />
-  <movevent event="StepIn" actionid="6667" script="poi/pisodanosul2.lua" />
-  <movevent event="StepIn" actionid="6666" script="poi/pisodanosul3.lua" />
-  <movevent event="StepIn" actionid="6680" script="poi/pisodanosudeste1.lua" />
-  <movevent event="StepIn" actionid="6681" script="poi/pisodanosudeste2.lua" />
-  <movevent event="StepIn" actionid="6682" script="poi/pisodanosudeste3.lua" />
-  <movevent event="StepIn" actionid="5510" script="poi/pisodanonordeste1.lua" />
-  <movevent event="StepIn" actionid="5511" script="poi/pisodanonordeste2.lua" />
-  <movevent event="StepIn" actionid="5512" script="poi/pisodanonordeste3.lua" />
-  <movevent event="StepIn" actionid="4481" script="poi/pisodanonorte1.lua" />
-  <movevent event="StepIn" actionid="4381" script="poi/pisodanonorte2.lua" />
-  <movevent event="StepIn" actionid="4281" script="poi/pisodanonorte3.lua" />
+ 
 
 	  <movevent event="StepIn" actionid="1473" script="tiles.lua" />
 	  <movevent event="StepIn" actionid="1471" script="tiles.lua" />
