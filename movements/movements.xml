@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
 <movements>
-<movevent event="StepIn" actionid="8201" script="tiles_dlegs.lua" />
+<movevent event="StepIn" actionid="8201" script="tiles_dlegs.lua" />requestVocationPOI
 	
 	<!-- Poi -->
 	
+	<!-- entrada da Poi -->	<movevent event="StepIn" actionid="5541" script="requestVocationPOI.lua" />
+					<movevent event="StepIn" actionid="5542" script="requestVocationPOI.lua" />
+					<movevent event="StepIn" actionid="5543" script="requestVocationPOI.lua" />
+					<movevent event="StepIn" actionid="5544" script="requestVocationPOI.lua" />
 	<movevent event="StepIn" uniqueid="9112" script="poi/tp1.lua" />
 
 <movevent event="StepIn" uniqueid="9113" script="poi/tp.lua" />
