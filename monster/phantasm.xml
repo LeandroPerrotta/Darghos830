@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="phantasm" nameDescription="a phantasm" race="undead" experience="3300" speed="280" manacost="0">
+<monster name="phantasm" nameDescription="a phantasm" race="undead" experience="5280" speed="280" manacost="0">
   <health now="3950" max="3950"/>
   <look type="241" head="20" corpse="6344"/>
   <targetchange interval="5000" chance="8"/>

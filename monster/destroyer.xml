@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="destroyer" nameDescription="a destroyer" race="blood" experience="2000" speed="270" manacost="0">
+<monster name="destroyer" nameDescription="a destroyer" race="blood" experience="3200" speed="270" manacost="0">
 	<health now="3700" max="3700"/>
 	<look type="236" corpse="6320"/>
 	<targetchange interval="5000" chance="8"/>
