@@ -59,7 +59,6 @@
          <inside>
 	<item id="6500" chance="2500" countmax="1" /> -- demonic essence           
 	 <item id="2260" chance="13500"/> --Blank Rune
-            <item id="700" chance="700"/> --Fire Axe
             <item id="2145" countmax="1" chance1="15000" chancemax="0"/> --Small Diamond
             <item id="2376" chance="12500"/> --Sword
             <item id="7894" chance="500"/> --Magma Legs

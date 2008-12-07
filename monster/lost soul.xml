@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="lost soul" nameDescription="a lost soul" race="undead" experience="2500" speed="250" manacost="0">
+<monster name="lost soul" nameDescription="a lost soul" race="undead" experience="4200" speed="250" manacost="0">
   <health now="8500" max="8500"/>
   <look type="232" corpse="6310"/>
   <targetchange interval="5000" chance="8"/>
@@ -71,7 +71,6 @@
 			<item id="2463" chance="3333" /> -- plate armor
 			<item id="6500" chance="10000" />--demonic essence
 			<item id="2173" chance="300" />--amulet of loss
-			<item id="1200" chance="2133" />--ruby necklace
 			<item id="6300" chance="1429" /> -- death ring
 			<item id="2483" chance="10000" /> -- scale armor
 			<item id="7413" chance="500" /> -- titan axe
