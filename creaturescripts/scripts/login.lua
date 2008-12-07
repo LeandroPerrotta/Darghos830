@@ -1,6 +1,15 @@
 function onLogin(cid)
 	registerCreatureEvent(cid, "PlayerDeath")	
-
+	
+	local newsValue = getPlayerStorageValue(cid,78444)
+	local message = 'Hoje 07/12 domingo, foi adicionado um pack de correções ao servidor.\nApartir de agora os monstros da POI(Pits of Inferno quest)\nestarão dando 60% a mais de experiência. \nE com essa correção foi corrigido também o bug nos fogos da entrada da POI\nCujos eram arrastados até as escadas fazendo players morrerem.\nSegue abaixo a lista das novas experiências:\n\nSpectre [Exp Atual: 1350 | Nova Exp: 2160]\nDiabolic Imp [Exp Atual: 1950 | Nova Exp: 3120]\nDefiler [Exp Atual: 2500 | Nova Exp: 4000]\nDestroyer [Exp Atual: 2000 | Nova Exp: 3200]\nHellfire Fighter [Exp Atual: 2200 | Nova Exp: 3520]\nPlaguesmith [Exp Atual: 3000 | Nova Exp: 4800]\nNightmare [Exp Atual: 2150 | Nova Exp: 3440]\nPhantasm [Exp Atual: 3300 | Nova Exp: 5280]\nBetrayed Wraith [Exp Atual: 3000 | Nova Exp: 4800]\nDark Torturer [Exp Atual: 3500 | Nova Exp: 5600]\nBlightwalker [Exp Atual: 3350 | Nova Exp: 5360]\nHand of Cursed Fate [Exp Atual: 3850 | Nova Exp: 6160]\nHellhound [Exp Atual: 4350 | Nova Exp: 6960]\n\n\nAtenciosamente,\nUltraXSoft Team.'
+	
+	if newsValue == 0 or newsValue == -1 then
+	
+	doPlayerPopupFYI(cid, message)
+	setPlayerStorageValue(cid,78444,1)
+	end
+	
 	if math.random(1, 100000) <= 400 then
 		local randomNumber = math.random(1, 2)
 
