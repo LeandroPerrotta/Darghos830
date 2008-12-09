@@ -7,7 +7,7 @@ function onLogin(cid)
 	if newsValue == 0 or newsValue == -1 then
 	
 	doPlayerPopupFYI(cid, message)
-	setPlayerStorageValue(cid,78444,1)
+	setPlayerStorageValue(cid,78445,1)
 	end
 	
 	if math.random(1, 100000) <= 400 then
