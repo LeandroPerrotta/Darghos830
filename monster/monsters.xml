@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <monsters>
+	<monster name="Wyrm" file="wyrm.xml" />
 	<monster name="Amazon" file="amazon.xml" />
 	<monster name="grynch clan goblin" file="grynch clan goblin.xml" />
 	<monster name="Grim Reaper" file="grim reaper.xml" />

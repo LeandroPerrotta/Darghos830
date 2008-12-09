@@ -8,8 +8,12 @@
 					<movevent event="StepIn" actionid="5542" script="requestVocationPOI.lua" />
 					<movevent event="StepIn" actionid="5543" script="requestVocationPOI.lua" />
 					<movevent event="StepIn" actionid="5544" script="requestVocationPOI.lua" />
-	<movevent event="StepIn" uniqueid="9112" script="poi/tp1.lua" />
+	
+	<movevent event="StepIn" actionid="10103" script="entrada_inquisition.lua" />
+	<movevent event="StepIn" actionid="10102" script="entrada_inquisition.lua" />
 
+	
+	
 <movevent event="StepIn" uniqueid="9113" script="poi/tp.lua" />
 
 <movevent event="StepIn" uniqueid="9114" script="poi/tp2.lua" />
