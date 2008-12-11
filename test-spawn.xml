@@ -2270,8 +2270,8 @@
   <spawn centerx="2172" centery="2124" centerz="6" radius="1">
     <npc name="vertigo_boat" x="1" y="0" z="6" spawntime="60"/>
   </spawn>
-  <spawn centerx="2117" centery="2130" centerz="6" radius="5">
-    <npc name="aracura_boat" x="1" y="-1" z="6" spawntime="60"/>
+  <spawn centerx="2120" centery="2126" centerz="6" radius="5">
+    <npc name="aracura_boat" x="-1" y="-3" z="6" spawntime="10"/>
   </spawn>
   <spawn centerx="1971" centery="2132" centerz="6" radius="5">
     <monster name="Dragon Hatchling" x="-1" y="-3" z="6" spawntime="60"/>
