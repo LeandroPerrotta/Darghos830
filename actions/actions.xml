@@ -7,7 +7,6 @@
 	<action uniqueid="55554" script="demonlegs/gate4.lua" />
 	<action uniqueid="55555" script="demonlegs/gate5.lua" />
 	<action uniqueid="55556" script="demonlegs/bau.lua" />
-	
 	<!-- Trap Box for Quests -->
 	<action uniqueid="1000" script="quests/trapBox.lua" />
 
