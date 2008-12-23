@@ -1,7 +1,8 @@
 function onLogin(cid)
 	registerCreatureEvent(cid, "PlayerDeath")	
+	registerCreatureEvent(cid, "kill")
 	
-	local newsValue = getPlayerStorageValue(cid,78445)
+	--[[local newsValue = getPlayerStorageValue(cid,78445)
 	local message = 'Hoje 09/12 , foi adicionado um pack de atualicoes ao servidor.\nApartir de agora personagens premmy account ja podem ter acesso a cavernas com bichos novos! \n\nNao perca tempo e compre agora mesmo sua premym account para poder desfrutar o melhor do servidor\n\n\nAtenciosamente,\nUltraXSoft.'
 	
 	if newsValue == 0 or newsValue == -1 then
@@ -9,6 +10,8 @@ function onLogin(cid)
 	doPlayerPopupFYI(cid, message)
 	setPlayerStorageValue(cid,78445,1)
 	end
+	
+	--]]
 	
 	if math.random(1, 100000) <= 400 then
 		local randomNumber = math.random(1, 2)
@@ -19,7 +22,7 @@ function onLogin(cid)
 			broadcastMessage("Adquira agora mesmo sua premium account e desfrute ao máximo do Darghos! Maiores informações -> ot.darghos.com/about.php?subtopic=getpremium",MESSAGE_STATUS_WARNING)	
 		end
 	end
-	
+
 --[[	globalStorageSave = 255
 	
 	if getGlobalStorageValue(globalStorageSave) < os.time() or getGlobalStorageValue(globalStorageSave) == nil then
